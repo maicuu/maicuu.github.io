@@ -3,126 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maicon | Dev Full-Stack</title>
+    <title>Maicon | Software Engineer & Automação</title>
+    
+    <meta name="description" content="Portfólio de Maicon, Desenvolvedor Fullstack especialista em Java, Spring Boot, React e automações com n8n.">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/606/606204.png" type="image/x-icon">
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #050505; color: #e2e8f0; }
-        .glow { position: absolute; width: 40vw; height: 40vw; background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, rgba(0,0,0,0) 70%); z-index: -1; pointer-events: none; }
-        .glass-card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); backdrop-filter: blur(12px); transition: all 0.4s ease; height: 100%; display: flex; flex-direction: column; }
-        .glass-card:hover { border-color: rgba(99, 102, 241, 0.4); background: rgba(255, 255, 255, 0.04); }
-        .project-img-container { width: 100%; height: 220px; overflow: hidden; border-radius: 8px; margin-bottom: 1.25rem; background: #0a0a0a; border: 1px solid rgba(255,255,255,0.05); cursor: zoom-in; }
-        .project-img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
-        .img-mobile { object-fit: contain; padding: 10px; }
-        .glass-card:hover .project-img { transform: scale(1.05); }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #050505; color: #e2e8f0; scroll-behavior: smooth; }
+        .glass-card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); backdrop-filter: blur(12px); transition: all 0.4s ease; }
+        .glass-card:hover { border-color: rgba(99, 102, 241, 0.4); background: rgba(255, 255, 255, 0.04); transform: translateY(-5px); }
+        .skill-badge { background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.2); padding: 6px 14px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; color: #a5b4fc; }
+        .project-img-big { width: 100%; height: 350px; object-fit: cover; border-radius: 12px; transition: 0.5s; cursor: zoom-in; }
         
-        /* Modal de Zoom (Lightbox) */
-        #modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); align-items: center; justify-content: center; padding: 20px; transition: 0.3s; }
-        #modal img { max-width: 95%; max-height: 90vh; border-radius: 4px; box-shadow: 0 0 50px rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.1); }
+        /* Modal Style */
+        .modal-overlay { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); align-items: center; justify-content: center; padding: 20px; overflow-y: auto; }
+        .modal-content { background: #0f1115; border: 1px solid #1e293b; max-width: 700px; width: 100%; padding: 40px; border-radius: 24px; position: relative; }
     </style>
 </head>
 <body class="antialiased overflow-x-hidden">
 
-    <div id="modal" onclick="this.style.display='none'"><img id="modal-img" src=""></div>
-    
-    <div class="glow top-[-10%] left-[-10%]"></div>
+    <div id="projectModal" class="modal-overlay" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button onclick="document.getElementById('projectModal').style.display='none'" class="absolute top-6 right-6 text-slate-500 hover:text-white"><i class="fa-solid fa-xmark text-2xl"></i></button>
+            <div id="modalBody">
+                </div>
+        </div>
+    </div>
 
-    <nav class="max-w-5xl mx-auto py-10 px-6 flex justify-between items-center text-sm font-medium">
-        <span class="text-2xl font-black tracking-tighter">M<span class="text-indigo-500">.</span></span>
-        <div class="flex gap-8 opacity-50 text-xs uppercase tracking-widest font-bold">
+    <nav class="fixed top-0 w-full z-50 glass-card border-none bg-black/50 py-4 px-6 flex justify-between items-center backdrop-blur-xl">
+        <span class="text-xl font-bold tracking-tighter">M<span class="text-indigo-500">.</span></span>
+        <div class="flex gap-8 text-sm font-medium opacity-80">
+            <a href="#" class="hover:text-indigo-400 transition">Início</a>
+            <a href="#habilidades" class="hover:text-indigo-400 transition">Habilidades</a>
             <a href="#projetos" class="hover:text-indigo-400 transition">Projetos</a>
-            <a href="https://wa.me/5588988824078" target="_blank" class="hover:text-indigo-400 transition font-black">Contato</a>
+            <a href="https://wa.me/5588988824078" class="hover:text-indigo-400 transition font-bold">Contato</a>
         </div>
     </nav>
 
-    <header class="max-w-4xl mx-auto pt-20 pb-32 px-6 text-center">
-        <h1 class="text-7xl md:text-8xl font-black tracking-tighter mb-8 bg-clip-text text-transparent bg-gradient-to-b from-white to-slate-500 leading-tight tracking-tight">Maicon.</h1>
-        <p class="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed font-light">
-            Especialista em Automação & Dev Full-Stack. <br>
-            Construindo <span class="text-white font-medium italic">Sistemas SaaS</span> que escalam operações reais.
+    <header class="min-h-screen flex flex-col justify-center items-center px-6 text-center">
+        <div class="mb-6 px-4 py-1 border border-indigo-500/30 rounded-full text-indigo-400 text-xs font-bold uppercase tracking-widest">
+            &lt; Olá, eu sou o Maicon /&gt;
+        </div>
+        <h1 class="text-6xl md:text-8xl font-extrabold tracking-tighter mb-6 bg-clip-text text-transparent bg-gradient-to-b from-white to-slate-500 leading-tight">
+            Software Engineer
+        </h1>
+        <p class="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed font-light mb-10">
+            Especialista em construir sistemas <span class="text-white font-semibold">Fullstack</span> e orquestrar <span class="text-white font-semibold">Automações inteligentes</span> que escalam negócios.
         </p>
-        <div class="mt-12">
-            <a href="https://wa.me/5588988824078" target="_blank" class="inline-block bg-white text-black px-10 py-4 text-xs font-black uppercase tracking-widest rounded-sm hover:bg-slate-200 transition">
-                Fale Comigo no WhatsApp
-            </a>
+        <div class="flex gap-4">
+            <a href="#projetos" class="bg-white text-black px-10 py-4 text-sm font-bold rounded-xl hover:scale-105 transition">Ver Projetos</a>
+            <a href="https://wa.me/5588988824078" target="_blank" class="glass-card px-10 py-4 text-sm font-bold rounded-xl hover:bg-white/10 transition">Falar com Maicon</a>
         </div>
     </header>
 
-    <main id="projetos" class="max-w-6xl mx-auto px-6 pb-40">
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <section id="habilidades" class="max-w-6xl mx-auto px-6 py-32 border-t border-white/5">
+        <h2 class="text-3xl font-bold mb-16 text-center italic">Minhas <span class="text-indigo-500">Habilidades</span></h2>
+        <div class="grid md:grid-cols-4 gap-8">
+            <div class="space-y-4">
+                <h3 class="text-lg font-bold text-white/90">Backend</h3>
+                <div class="flex flex-wrap gap-2">
+                    <span class="skill-badge">Java 21</span>
+                    <span class="skill-badge">Spring Boot 3</span>
+                    <span class="skill-badge">Spring Security</span>
+                    <span class="skill-badge">Node.js</span>
+                </div>
+            </div>
+            <div class="space-y-4">
+                <h3 class="text-lg font-bold text-white/90">Frontend</h3>
+                <div class="flex flex-wrap gap-2">
+                    <span class="skill-badge">React.js</span>
+                    <span class="skill-badge">TypeScript</span>
+                    <span class="skill-badge">Tailwind CSS</span>
+                </div>
+            </div>
+            <div class="space-y-4">
+                <h3 class="text-lg font-bold text-white/90">Database</h3>
+                <div class="flex flex-wrap gap-2">
+                    <span class="skill-badge">PostgreSQL</span>
+                    <span class="skill-badge">MySQL</span>
+                    <span class="skill-badge">Supabase</span>
+                </div>
+            </div>
+            <div class="space-y-4">
+                <h3 class="text-lg font-bold text-white/90">Automação</h3>
+                <div class="flex flex-wrap gap-2">
+                    <span class="skill-badge">n8n</span>
+                    <span class="skill-badge">Webhooks</span>
+                    <span class="skill-badge">Docker</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projetos" class="max-w-6xl mx-auto px-6 py-32 border-t border-white/5">
+        <h2 class="text-3xl font-bold mb-20 text-center italic">Projetos <span class="text-indigo-500">Em Destaque</span></h2>
+
+        <div class="grid md:grid-cols-2 gap-12">
             
-            <div class="glass-card p-6 rounded-2xl">
-                <div class="project-img-container" onclick="openModal('img/gestorflex.png')">
-                    <img src="img/gestorflex.png" class="project-img" onerror="this.src='https://placehold.co/600x400/0a0a0a/white?text=GestorFlex'">
-                </div>
-                <h3 class="text-xl font-bold mb-3 tracking-tight">GestorFlex PDV</h3>
-                <p class="text-sm text-slate-400 mb-6 flex-grow leading-relaxed">Sistema completo de gestão comercial com controle de estoque, mesas e faturamento automatizado.</p>
-                <div class="flex items-center justify-between font-bold tracking-widest uppercase text-[10px]">
-                    <span class="text-indigo-400">Java • Spring Boot • MySQL</span>
-                    <a href="https://github.com/maicuu/gestorfleex" target="_blank" class="opacity-40 hover:opacity-100 transition"><i class="fa-brands fa-github text-xl"></i></a>
+            <div class="glass-card p-8 rounded-3xl flex flex-col">
+                <img src="img/gestorflex.png" class="project-img-big mb-8">
+                <h3 class="text-2xl font-bold mb-2">GestorFlex ERP</h3>
+                <p class="text-slate-400 text-sm mb-6 flex-grow leading-relaxed">PDV completo e gestão empresarial analítica com Java e Spring Boot.</p>
+                <button onclick="showDetails('gestorflex')" class="text-indigo-400 text-xs font-bold uppercase tracking-widest hover:text-white transition text-left mb-6">Saiba mais sobre o projeto →</button>
+                <div class="flex gap-4">
+                    <a href="https://github.com/maicuu/gestorfleex" target="_blank" class="flex-1 bg-white/5 hover:bg-white/10 text-center py-3 rounded-xl text-sm font-bold transition">Código</a>
                 </div>
             </div>
 
-            <div class="glass-card p-6 rounded-2xl ring-1 ring-indigo-500/20">
-                <div class="project-img-container" onclick="openModal('img/Cardapio.png')">
-                    <img src="img/Cardapio.png" class="project-img" onerror="this.src='https://placehold.co/600x400/0a0a0a/white?text=Cardapio'">
+            <div class="glass-card p-8 rounded-3xl flex flex-col">
+                <img src="img/barber.png" class="project-img-big mb-8 object-contain bg-black/40">
+                <h3 class="text-2xl font-bold mb-2">Agenda Fácil Barber</h3>
+                <p class="text-slate-400 text-sm mb-6 flex-grow leading-relaxed">SaaS de agendamento automático com sincronização Google Calendar em tempo real.</p>
+                <button onclick="showDetails('barber')" class="text-indigo-400 text-xs font-bold uppercase tracking-widest hover:text-white transition text-left mb-6">Saiba mais sobre o projeto →</button>
+                <div class="flex gap-4">
+                    <a href="https://agendafacilbarber.com/belezapura" target="_blank" class="flex-1 bg-indigo-600 hover:bg-indigo-500 text-center py-3 rounded-xl text-sm font-bold transition">Live Demo</a>
                 </div>
-                <h3 class="text-xl font-bold mb-1 tracking-tight text-indigo-400">Cardápio Digital</h3>
-                <p class="text-[10px] font-black uppercase text-indigo-500/60 mb-3 tracking-widest italic">Módulo GestorFlex</p>
-                <p class="text-sm text-slate-400 mb-6 flex-grow leading-relaxed">Interface de delivery sincronizada ao GestorFlex. Pedidos caem em tempo real no dashboard e impressora térmica.</p>
-                <div class="text-[10px] font-bold tracking-widest uppercase text-slate-500">Integração Full-Stack</div>
-            </div>
-
-            <div class="glass-card p-6 rounded-2xl">
-                <div class="project-img-container" onclick="openModal('img/barber.png')">
-                    <img src="img/barber.png" class="project-img img-mobile" onerror="this.src='https://placehold.co/400x600/0a0a0a/white?text=BarberSaaS'">
-                </div>
-                <h3 class="text-xl font-bold mb-3 tracking-tight">BarberSaaS</h3>
-                <p class="text-sm text-slate-400 mb-6 flex-grow leading-relaxed">SaaS de agendamento multi-unidade com lógica complexa de slots e Google Calendar API.</p>
-                <div class="flex items-center justify-between">
-                    <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest italic">Node.js • API</span>
-                    <a href="https://agendafacilbarber.com/belezapura" target="_blank" class="text-[10px] font-bold text-indigo-400 uppercase hover:underline tracking-widest">Live Site →</a>
-                </div>
-            </div>
-
-            <div class="glass-card p-6 rounded-2xl">
-                <div class="project-img-container" onclick="openModal('img/flushcar.png')">
-                    <img src="img/flushcar.png" class="project-img" onerror="this.src='https://placehold.co/600x400/0a0a0a/white?text=Flush+Car'">
-                </div>
-                <h3 class="text-xl font-bold mb-3 tracking-tight">Flush Car</h3>
-                <p class="text-sm text-slate-400 mb-6 flex-grow leading-relaxed">Gestão de estética automotiva. Desenvolvido com foco em tipagem forte e performance financeira.</p>
-                <div class="flex items-center justify-between text-[10px] font-bold tracking-widest uppercase">
-                    <span class="text-indigo-400">React • TypeScript • Supabase</span>
-                </div>
-            </div>
-
-            <div class="glass-card p-6 rounded-2xl border-indigo-500/10">
-                <div class="project-img-container" onclick="openModal('img/n8n.png')">
-                    <img src="img/n8n.png" class="project-img img-mobile" onerror="this.src='https://placehold.co/400x600/0a0a0a/white?text=WhatsApp+Bot'">
-                </div>
-                <h3 class="text-xl font-bold mb-3 tracking-tight">WhatsApp Agent</h3>
-                <p class="text-sm text-slate-400 mb-6 flex-grow leading-relaxed">Automação de alto nível com n8n para captura de leads e autoatendimento escalável.</p>
-                <a href="https://wa.me/5588988824078" target="_blank" class="w-full text-center py-3 border border-indigo-500/30 rounded-sm text-[10px] font-black uppercase tracking-widest text-indigo-400 hover:bg-indigo-500 hover:text-white transition">Testar no WhatsApp</a>
             </div>
 
         </div>
-    </main>
+    </section>
 
-    <footer class="max-w-5xl mx-auto py-20 px-6 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-slate-500 text-[10px] uppercase font-bold tracking-widest gap-6">
-        <p>© 2024 Maicon • Transformando processos em tecnologia.</p>
-        <div class="flex gap-8">
-            <a href="https://wa.me/5588988824078" target="_blank" class="hover:text-white transition">WhatsApp</a>
-            <a href="https://github.com/maicuu" target="_blank" class="hover:text-white transition">GitHub</a>
-        </div>
+    <footer class="py-20 text-center border-t border-white/5 text-slate-500 text-xs uppercase tracking-widest font-bold">
+        © 2024 Maicon • Engineered for business
     </footer>
 
     <script>
-        function openModal(src) {
-            document.getElementById('modal-img').src = src;
-            document.getElementById('modal').style.display = 'flex';
+        const projectData = {
+            gestorflex: {
+                title: "GestorFlex ERP",
+                tag: "Gestão Empresarial & PDV",
+                challenge: "Empresas enfrentam lentidão no fechamento de caixa e falta de controle real sobre mesas e estoque.",
+                solution: "Desenvolvi um ecossistema com Backend em Java 21 e Spring Boot 3, utilizando Spring Security (JWT) para autenticação. O sistema oferece PDV ágil, gestão de faturamento com dashboards visuais em React e integração total com o módulo de delivery.",
+                stack: "Java, Spring Boot, React, MySQL, Docker."
+            },
+            barber: {
+                title: "Agenda Fácil Barber",
+                tag: "SaaS de Agendamento",
+                challenge: "Barbeiros perdem tempo confirmando horários e sofrem com 'no-shows' ou conflitos de agenda.",
+                solution: "Criei uma plataforma que integra a Google Calendar API via OAuth2. O cliente agenda sozinho e o horário é bloqueado instantaneamente na agenda do profissional. Desenvolvido com Node.js e focado em performance mobile.",
+                stack: "Node.js, MongoDB, Google Calendar API, TypeScript."
+            }
+        };
+
+        function showDetails(id) {
+            const data = projectData[id];
+            const modalBody = document.getElementById('modalBody');
+            modalBody.innerHTML = `
+                <h2 class="text-3xl font-black mb-1">${data.title}</h2>
+                <p class="text-indigo-400 text-xs font-bold uppercase tracking-widest mb-8">${data.tag}</p>
+                
+                <div class="space-y-6">
+                    <div>
+                        <h4 class="text-white font-bold mb-2">O Desafio</h4>
+                        <p class="text-slate-400 text-sm leading-relaxed">${data.challenge}</p>
+                    </div>
+                    <div>
+                        <h4 class="text-white font-bold mb-2">A Solução Técnica</h4>
+                        <p class="text-slate-400 text-sm leading-relaxed">${data.solution}</p>
+                    </div>
+                    <div class="pt-6">
+                        <p class="text-xs text-slate-500 font-bold uppercase tracking-tighter">Stack Tecnológica:</p>
+                        <p class="text-indigo-300 text-sm font-semibold">${data.stack}</p>
+                    </div>
+                </div>
+            `;
+            document.getElementById('projectModal').style.display = 'flex';
+        }
+
+        function closeModal(e) {
+            if(e.target.id === 'projectModal') {
+                document.getElementById('projectModal').style.display = 'none';
+            }
         }
     </script>
-
 </body>
 </html>
