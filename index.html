@@ -10,40 +10,41 @@
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #050505; color: #e2e8f0; }
         .glow { position: absolute; width: 40vw; height: 40vw; background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, rgba(0,0,0,0) 70%); z-index: -1; pointer-events: none; }
-        .glass-card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); backdrop-filter: blur(12px); transition: all 0.4s ease; }
+        .glass-card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); backdrop-filter: blur(12px); transition: all 0.4s ease; height: 100%; display: flex; flex-direction: column; }
         .glass-card:hover { border-color: rgba(99, 102, 241, 0.4); background: rgba(255, 255, 255, 0.04); }
         .project-img-container { width: 100%; height: 220px; overflow: hidden; border-radius: 8px; margin-bottom: 1.25rem; background: #0a0a0a; border: 1px solid rgba(255,255,255,0.05); cursor: zoom-in; }
         .project-img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
-        .img-mobile { object-fit: contain; padding: 5px; }
+        .img-mobile { object-fit: contain; padding: 10px; }
         .glass-card:hover .project-img { transform: scale(1.05); }
         
         /* Modal de Zoom (Lightbox) */
-        #modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); align-items: center; justify-content: center; padding: 20px; }
-        #modal img { max-width: 90%; max-height: 90vh; border-radius: 8px; box-shadow: 0 0 30px rgba(0,0,0,0.5); }
+        #modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); align-items: center; justify-content: center; padding: 20px; transition: 0.3s; }
+        #modal img { max-width: 95%; max-height: 90vh; border-radius: 4px; box-shadow: 0 0 50px rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.1); }
     </style>
 </head>
 <body class="antialiased overflow-x-hidden">
 
-    <div id="modal" onclick="this.style.display='none'"><img id="modal-img"></div>
+    <div id="modal" onclick="this.style.display='none'"><img id="modal-img" src=""></div>
+    
     <div class="glow top-[-10%] left-[-10%]"></div>
 
     <nav class="max-w-5xl mx-auto py-10 px-6 flex justify-between items-center text-sm font-medium">
         <span class="text-2xl font-black tracking-tighter">M<span class="text-indigo-500">.</span></span>
         <div class="flex gap-8 opacity-50 text-xs uppercase tracking-widest font-bold">
             <a href="#projetos" class="hover:text-indigo-400 transition">Projetos</a>
-            <a href="https://wa.me/5588988824078" target="_blank" class="hover:text-indigo-400 transition">Contato</a>
+            <a href="https://wa.me/5588988824078" target="_blank" class="hover:text-indigo-400 transition font-black">Contato</a>
         </div>
     </nav>
 
     <header class="max-w-4xl mx-auto pt-20 pb-32 px-6 text-center">
-        <h1 class="text-7xl md:text-8xl font-black tracking-tighter mb-8 bg-clip-text text-transparent bg-gradient-to-b from-white to-slate-500 leading-tight">Maicon.</h1>
+        <h1 class="text-7xl md:text-8xl font-black tracking-tighter mb-8 bg-clip-text text-transparent bg-gradient-to-b from-white to-slate-500 leading-tight tracking-tight">Maicon.</h1>
         <p class="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed font-light">
-            Desenvolvedor Full-Stack & Automação. <br>
-            Construindo <span class="text-white font-medium italic">soluções robustas</span> para negócios reais.
+            Especialista em Automação & Dev Full-Stack. <br>
+            Construindo <span class="text-white font-medium italic">Sistemas SaaS</span> que escalam operações reais.
         </p>
         <div class="mt-12">
             <a href="https://wa.me/5588988824078" target="_blank" class="inline-block bg-white text-black px-10 py-4 text-xs font-black uppercase tracking-widest rounded-sm hover:bg-slate-200 transition">
-                Vamos Conversar
+                Fale Comigo no WhatsApp
             </a>
         </div>
     </header>
@@ -51,59 +52,65 @@
     <main id="projetos" class="max-w-6xl mx-auto px-6 pb-40">
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             
-            <div class="glass-card p-6 rounded-2xl flex flex-col">
+            <div class="glass-card p-6 rounded-2xl">
                 <div class="project-img-container" onclick="openModal('img/gestorflex.png')">
                     <img src="img/gestorflex.png" class="project-img" onerror="this.src='https://placehold.co/600x400/0a0a0a/white?text=GestorFlex'">
                 </div>
                 <h3 class="text-xl font-bold mb-3 tracking-tight">GestorFlex PDV</h3>
-                <p class="text-sm text-slate-400 mb-6 flex-grow leading-relaxed">Sistema de PDV com gestão de mesas e faturamento.</p>
+                <p class="text-sm text-slate-400 mb-6 flex-grow leading-relaxed">Sistema completo de gestão comercial com controle de estoque, mesas e faturamento automatizado.</p>
                 <div class="flex items-center justify-between font-bold tracking-widest uppercase text-[10px]">
-                    <span class="text-indigo-400">Java • Spring • React</span>
-                    <a href="https://github.com/maicuu/gestorfleex" target="_blank" class="opacity-40 hover:opacity-100 transition"><i class="fa-brands fa-github text-lg"></i></a>
+                    <span class="text-indigo-400">Java • Spring Boot • MySQL</span>
+                    <a href="https://github.com/maicuu/gestorfleex" target="_blank" class="opacity-40 hover:opacity-100 transition"><i class="fa-brands fa-github text-xl"></i></a>
                 </div>
             </div>
 
-            <div class="glass-card p-6 rounded-2xl flex flex-col ring-1 ring-indigo-500/20">
+            <div class="glass-card p-6 rounded-2xl ring-1 ring-indigo-500/20">
                 <div class="project-img-container" onclick="openModal('img/Cardapio.png')">
                     <img src="img/Cardapio.png" class="project-img" onerror="this.src='https://placehold.co/600x400/0a0a0a/white?text=Cardapio'">
                 </div>
-                <h3 class="text-xl font-bold mb-3 tracking-tight text-indigo-400">Cardápio Digital</h3>
-                <p class="text-sm text-slate-400 mb-6 flex-grow leading-relaxed">Módulo delivery com integração direta à cozinha.</p>
-                <span class="text-[10px] font-bold tracking-widest uppercase text-slate-500 italic">Integrado ao GestorFlex</span>
+                <h3 class="text-xl font-bold mb-1 tracking-tight text-indigo-400">Cardápio Digital</h3>
+                <p class="text-[10px] font-black uppercase text-indigo-500/60 mb-3 tracking-widest italic">Módulo GestorFlex</p>
+                <p class="text-sm text-slate-400 mb-6 flex-grow leading-relaxed">Interface de delivery sincronizada ao GestorFlex. Pedidos caem em tempo real no dashboard e impressora térmica.</p>
+                <div class="text-[10px] font-bold tracking-widest uppercase text-slate-500">Integração Full-Stack</div>
             </div>
 
-            <div class="glass-card p-6 rounded-2xl flex flex-col">
+            <div class="glass-card p-6 rounded-2xl">
                 <div class="project-img-container" onclick="openModal('img/barber.png')">
                     <img src="img/barber.png" class="project-img img-mobile" onerror="this.src='https://placehold.co/400x600/0a0a0a/white?text=BarberSaaS'">
                 </div>
                 <h3 class="text-xl font-bold mb-3 tracking-tight">BarberSaaS</h3>
-                <p class="text-sm text-slate-400 mb-6 flex-grow leading-relaxed">Agendamento inteligente via Google Calendar.</p>
-                <a href="https://agendafacilbarber.com/belezapura" target="_blank" class="text-[10px] font-bold text-indigo-400 uppercase hover:underline tracking-widest">Live Preview →</a>
+                <p class="text-sm text-slate-400 mb-6 flex-grow leading-relaxed">SaaS de agendamento multi-unidade com lógica complexa de slots e Google Calendar API.</p>
+                <div class="flex items-center justify-between">
+                    <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest italic">Node.js • API</span>
+                    <a href="https://agendafacilbarber.com/belezapura" target="_blank" class="text-[10px] font-bold text-indigo-400 uppercase hover:underline tracking-widest">Live Site →</a>
+                </div>
             </div>
 
-            <div class="glass-card p-6 rounded-2xl flex flex-col">
+            <div class="glass-card p-6 rounded-2xl">
                 <div class="project-img-container" onclick="openModal('img/flushcar.png')">
                     <img src="img/flushcar.png" class="project-img" onerror="this.src='https://placehold.co/600x400/0a0a0a/white?text=Flush+Car'">
                 </div>
                 <h3 class="text-xl font-bold mb-3 tracking-tight">Flush Car</h3>
-                <p class="text-sm text-slate-400 mb-6 flex-grow leading-relaxed">Gestão e dashboards para estética automotiva.</p>
-                <span class="text-[10px] font-bold tracking-widest uppercase text-slate-500">React • Supabase</span>
+                <p class="text-sm text-slate-400 mb-6 flex-grow leading-relaxed">Gestão de estética automotiva. Desenvolvido com foco em tipagem forte e performance financeira.</p>
+                <div class="flex items-center justify-between text-[10px] font-bold tracking-widest uppercase">
+                    <span class="text-indigo-400">React • TypeScript • Supabase</span>
+                </div>
             </div>
 
-            <div class="glass-card p-6 rounded-2xl flex flex-col border-indigo-500/10">
+            <div class="glass-card p-6 rounded-2xl border-indigo-500/10">
                 <div class="project-img-container" onclick="openModal('img/n8n.png')">
-                    <img src="img/n8n.png" class="project-img img-mobile" onerror="this.src='https://placehold.co/400x600/0a0a0a/white?text=Bot'">
+                    <img src="img/n8n.png" class="project-img img-mobile" onerror="this.src='https://placehold.co/400x600/0a0a0a/white?text=WhatsApp+Bot'">
                 </div>
                 <h3 class="text-xl font-bold mb-3 tracking-tight">WhatsApp Agent</h3>
-                <p class="text-sm text-slate-400 mb-6 flex-grow leading-relaxed">Automação inteligente n8n para leads.</p>
-                <a href="https://wa.me/5588988824078" target="_blank" class="w-full text-center py-3 border border-indigo-500/30 rounded-sm text-[10px] font-black uppercase tracking-widest text-indigo-400 hover:bg-indigo-500 hover:text-white transition">Testar WhatsApp</a>
+                <p class="text-sm text-slate-400 mb-6 flex-grow leading-relaxed">Automação de alto nível com n8n para captura de leads e autoatendimento escalável.</p>
+                <a href="https://wa.me/5588988824078" target="_blank" class="w-full text-center py-3 border border-indigo-500/30 rounded-sm text-[10px] font-black uppercase tracking-widest text-indigo-400 hover:bg-indigo-500 hover:text-white transition">Testar no WhatsApp</a>
             </div>
 
         </div>
     </main>
 
     <footer class="max-w-5xl mx-auto py-20 px-6 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-slate-500 text-[10px] uppercase font-bold tracking-widest gap-6">
-        <p>© 2024 Maicon • Engineered for business</p>
+        <p>© 2024 Maicon • Transformando processos em tecnologia.</p>
         <div class="flex gap-8">
             <a href="https://wa.me/5588988824078" target="_blank" class="hover:text-white transition">WhatsApp</a>
             <a href="https://github.com/maicuu" target="_blank" class="hover:text-white transition">GitHub</a>
