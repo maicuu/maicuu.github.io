@@ -18,6 +18,8 @@
         .project-img-big { width: 100%; height: 320px; object-fit: cover; border-radius: 15px; transition: 0.5s; cursor: pointer; }
         .modal-overlay { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.96); align-items: center; justify-content: center; padding: 20px; }
         .modal-content { background: #0f1115; border: 1px solid #1e293b; max-width: 650px; width: 100%; padding: 40px; border-radius: 28px; position: relative; }
+        .tech-list li { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: #94a3b8; margin-bottom: 4px; }
+        .tech-list li::before { content: "•"; color: #6366f1; font-weight: bold; }
     </style>
 </head>
 <body class="antialiased overflow-x-hidden">
@@ -40,109 +42,129 @@
     </nav>
 
     <header class="min-h-screen flex flex-col justify-center items-center px-6 text-center">
-        <div class="mb-8 px-5 py-1.5 border border-indigo-500/30 rounded-full text-indigo-400 text-xs font-black uppercase tracking-[0.2em] animate-pulse">&lt; Olá, eu sou o Maicon /&gt;</div>
-        <h1 class="text-6xl md:text-9xl font-black tracking-tighter mb-8 bg-clip-text text-transparent bg-gradient-to-b from-white to-slate-500 leading-none">Software Engineer</h1>
+        <div class="mb-8 px-5 py-1.5 border border-indigo-500/30 rounded-full text-indigo-400 text-xs font-black uppercase tracking-[0.2em] animate-pulse">&lt; Maicon Dev /&gt;</div>
+        <h1 class="text-6xl md:text-9xl font-black tracking-tighter mb-8 bg-clip-text text-transparent bg-gradient-to-b from-white to-slate-500 leading-none text-center">Software Engineer</h1>
         <p class="text-xl md:text-2xl text-slate-400 max-w-3xl mx-auto leading-relaxed font-light mb-12">
-            Especialista em <span class="text-white font-semibold italic">Sistemas de Gestão (ERP)</span> e <span class="text-white font-semibold italic">Agentes de IA</span> que transformam negócios.
+            Especialista em <span class="text-white font-semibold italic">Sistemas de Gestão (ERP)</span> e <span class="text-white font-semibold italic">Agentes de IA</span>.
         </p>
         <div class="flex gap-6">
-            <a href="#projetos" class="bg-indigo-600 text-white px-12 py-5 text-sm font-black uppercase tracking-widest rounded-2xl hover:bg-indigo-500 hover:scale-105 transition shadow-lg shadow-indigo-500/20">Ver Projetos</a>
+            <a href="#projetos" class="bg-indigo-600 text-white px-12 py-5 text-sm font-black uppercase tracking-widest rounded-2xl hover:bg-indigo-500 transition shadow-lg shadow-indigo-500/20">Projetos</a>
             <a href="#contato" class="glass-card px-12 py-5 text-sm font-black uppercase tracking-widest rounded-2xl hover:bg-white/10 transition">Conectar</a>
         </div>
     </header>
 
     <section id="habilidades" class="max-w-6xl mx-auto px-6 py-40 border-t border-white/5">
-        <h2 class="text-4xl font-black mb-20 text-center uppercase tracking-tighter italic">Minhas <span class="text-indigo-500">Habilidades</span></h2>
+        <h2 class="text-4xl font-black mb-20 text-center uppercase tracking-tighter italic">Minhas <span class="text-indigo-500">Skills</span></h2>
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div class="skill-box">
                 <i class="fa-solid fa-layer-group text-indigo-500 mb-6 text-3xl"></i>
                 <h3 class="font-black text-white text-lg mb-4 uppercase tracking-tight">Backend</h3>
                 <div class="flex flex-wrap gap-2">
-                    <span class="skill-tag">Java 21</span><span class="skill-tag">Spring Boot 3</span><span class="skill-tag">Node.js</span><span class="skill-tag">API REST</span>
+                    <span class="skill-tag">Java 21</span><span class="skill-tag">Spring Boot</span><span class="skill-tag">Node.js</span>
                 </div>
             </div>
             <div class="skill-box">
                 <i class="fa-solid fa-code text-indigo-500 mb-6 text-3xl"></i>
                 <h3 class="font-black text-white text-lg mb-4 uppercase tracking-tight">Frontend</h3>
                 <div class="flex flex-wrap gap-2">
-                    <span class="skill-tag">React 18</span><span class="skill-tag">TypeScript</span><span class="skill-tag">JavaScript</span><span class="skill-tag">Tailwind</span>
+                    <span class="skill-tag">React 18</span><span class="skill-tag">TypeScript</span><span class="skill-tag">JavaScript</span>
                 </div>
             </div>
             <div class="skill-box">
                 <i class="fa-solid fa-database text-indigo-500 mb-6 text-3xl"></i>
-                <h3 class="font-black text-white text-lg mb-4 uppercase tracking-tight">Database</h3>
+                <h3 class="font-black text-white text-lg mb-4 uppercase tracking-tight">Data</h3>
                 <div class="flex flex-wrap gap-2">
-                    <span class="skill-tag">PostgreSQL</span><span class="skill-tag">MySQL</span><span class="skill-tag">MongoDB</span><span class="skill-tag">Supabase</span>
+                    <span class="skill-tag">PostgreSQL</span><span class="skill-tag">MySQL</span><span class="skill-tag">Supabase</span>
                 </div>
             </div>
             <div class="skill-box">
                 <i class="fa-solid fa-brain text-indigo-500 mb-6 text-3xl"></i>
                 <h3 class="font-black text-white text-lg mb-4 uppercase tracking-tight">IA & Flow</h3>
                 <div class="flex flex-wrap gap-2">
-                    <span class="skill-tag">n8n</span><span class="skill-tag">IA Agents</span><span class="skill-tag">OpenAI API</span><span class="skill-tag">Automation</span>
+                    <span class="skill-tag">n8n</span><span class="skill-tag">IA Agents</span><span class="skill-tag">OpenAI</span>
                 </div>
             </div>
         </div>
     </section>
 
     <section id="projetos" class="max-w-7xl mx-auto px-6 py-20 border-t border-white/5">
-        <h2 class="text-4xl font-black mb-20 text-center uppercase tracking-tighter italic">Projetos <span class="text-indigo-500">em Destaque</span></h2>
+        <h2 class="text-4xl font-black mb-20 text-center uppercase tracking-tighter italic">Ecossistema de <span class="text-indigo-500">Projetos</span></h2>
         <div class="grid md:grid-cols-2 gap-16">
             
             <div class="glass-card p-10 rounded-[32px] flex flex-col">
                 <img src="img/gestorflex.png" class="project-img-big mb-10" onclick="showDetails('gestorflex')">
-                <h3 class="text-3xl font-black mb-3 italic">GestorFlex ERP</h3>
-                <p class="text-slate-400 mb-8 leading-relaxed">Ecossistema de gestão empresarial com PDV, controle de mesas e dashboards financeiros robustos.</p>
-                <div class="flex gap-4 mt-auto">
-                    <button onclick="showDetails('gestorflex')" class="flex-1 bg-white/5 py-4 rounded-2xl font-bold hover:bg-white/10 transition">Saiba mais →</button>
-                    <a href="https://github.com/maicuu/gestorfleex" target="_blank" class="px-6 bg-white/5 py-4 rounded-2xl hover:bg-white/10 transition"><i class="fa-brands fa-github text-xl"></i></a>
+                <h3 class="text-3xl font-black mb-3 italic">GestorFlex & Cardápio Digital</h3>
+                <p class="text-slate-400 mb-6 text-sm">Ecossistema comercial completo com PDV, gestão de mesas e módulo delivery "iFood-like".</p>
+                <ul class="tech-list mb-8">
+                    <li>Java 17 / Spring Boot</li>
+                    <li>Spring Data JPA</li>
+                    <li>React + Tailwind CSS</li>
+                </ul>
+                <div class="mt-auto flex gap-4">
+                    <button onclick="showDetails('gestorflex')" class="flex-1 bg-white/5 py-4 rounded-2xl font-bold hover:bg-white/10 transition">Detalhes</button>
+                    <a href="https://github.com/maicuu/gestorfleex" target="_blank" class="px-6 bg-white/5 py-4 rounded-2xl hover:bg-white/10 transition flex items-center"><i class="fa-brands fa-github"></i></a>
                 </div>
             </div>
 
             <div class="glass-card p-10 rounded-[32px] flex flex-col border-indigo-500/20">
                 <img src="img/n8n.png" class="project-img-big mb-10 object-contain bg-indigo-500/5" onclick="showDetails('n8n')">
                 <h3 class="text-3xl font-black mb-3 text-indigo-400 italic">Atendente IA Clínica</h3>
-                <p class="text-slate-400 mb-8 leading-relaxed">Agente de IA via n8n para clínicas, realizando triagem inteligente e agendamento automático humanizado.</p>
-                <button onclick="showDetails('n8n')" class="w-full bg-indigo-600/10 text-indigo-400 py-4 rounded-2xl font-bold mb-4 hover:bg-indigo-600/20 transition">Detalhes Técnicos</button>
-            </div>
-
-            <div class="glass-card p-10 rounded-[32px] flex flex-col">
-                <img src="img/flushcar.png" class="project-img-big mb-10" onclick="showDetails('flushcar')">
-                <h3 class="text-3xl font-black mb-3 italic">Flush Car Manager</h3>
-                <p class="text-slate-400 mb-8 leading-relaxed">Dashboard premium para gestão de estética automotiva, focado em checklists de serviços e controle financeiro.</p>
-                <button onclick="showDetails('flushcar')" class="bg-white/5 py-4 rounded-2xl font-bold hover:bg-white/10 transition">Ver Detalhes →</button>
+                <p class="text-slate-400 mb-6 text-sm">Agente autônomo para triagem inteligente e agendamento humanizado via WhatsApp.</p>
+                <ul class="tech-list mb-8">
+                    <li>n8n Workflow</li>
+                    <li>OpenAI API</li>
+                    <li>WhatsApp Cloud API</li>
+                </ul>
+                <button onclick="showDetails('n8n')" class="w-full bg-indigo-600/10 text-indigo-400 py-4 rounded-2xl font-bold hover:bg-indigo-600/20 transition">Ver Workflow</button>
             </div>
 
             <div class="glass-card p-10 rounded-[32px] flex flex-col">
                 <img src="img/barber.png" class="project-img-big mb-10 object-contain bg-black/40" onclick="showDetails('barber')">
                 <h3 class="text-3xl font-black mb-3 italic">BarberSaaS</h3>
-                <p class="text-slate-400 mb-8 leading-relaxed">SaaS de agendamento 80% em JavaScript, com integração Google Calendar API e autenticação OAuth2.</p>
-                <a href="https://agendafacilbarber.com/belezapura" target="_blank" class="bg-indigo-600 py-4 rounded-2xl font-bold text-center hover:bg-indigo-500 transition shadow-lg shadow-indigo-600/20">Live Demo</a>
+                <p class="text-slate-400 mb-6 text-sm">Plataforma multi-tenant com lógica de disponibilidade e integração com Google Calendar.</p>
+                <ul class="tech-list mb-8">
+                    <li>JavaScript / Node.js</li>
+                    <li>MongoDB</li>
+                    <li>Google Calendar API</li>
+                </ul>
+                <a href="https://agendafacilbarber.com/belezapura" target="_blank" class="bg-indigo-600 py-4 rounded-2xl font-bold text-center hover:bg-indigo-500 transition">Live Demo</a>
+            </div>
+
+            <div class="glass-card p-10 rounded-[32px] flex flex-col">
+                <img src="img/flushcar.png" class="project-img-big mb-10" onclick="showDetails('flushcar')">
+                <h3 class="text-3xl font-black mb-3 italic">Flush Car Manager</h3>
+                <p class="text-slate-400 mb-6 text-sm">Gestão de estética automotiva com dashboards dinâmicos e precificação por categoria.</p>
+                <ul class="tech-list mb-8">
+                    <li>React / TypeScript</li>
+                    <li>Supabase (BaaS)</li>
+                    <li>Tailwind CSS</li>
+                </ul>
+                <button onclick="showDetails('flushcar')" class="bg-white/5 py-4 rounded-2xl font-bold hover:bg-white/10 transition">Detalhes Técnicos</button>
             </div>
 
         </div>
     </section>
 
     <section id="contato" class="max-w-5xl mx-auto px-6 py-40 text-center">
-        <h2 class="text-5xl font-black mb-16 italic uppercase tracking-tighter text-white">Conectar com <span class="text-indigo-500">Maicon</span></h2>
+        <h2 class="text-5xl font-black mb-16 italic uppercase tracking-tighter">Conectar com <span class="text-indigo-500">Maicon</span></h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <a href="https://github.com/maicuu" target="_blank" class="glass-card p-10 rounded-3xl flex flex-col items-center gap-6 group">
                 <div class="w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center group-hover:bg-white/10 transition">
                     <i class="fa-brands fa-github text-4xl"></i>
                 </div>
-                <span class="font-black uppercase tracking-widest text-sm">Meu GitHub</span>
+                <span class="font-black uppercase tracking-widest text-sm">GitHub</span>
             </a>
             <a href="https://www.linkedin.com/in/maiconce/" target="_blank" class="glass-card p-10 rounded-3xl flex flex-col items-center gap-6 group border-blue-500/20">
                 <div class="w-16 h-16 bg-blue-600/10 rounded-2xl flex items-center justify-center group-hover:bg-blue-600/20 transition">
                     <i class="fa-brands fa-linkedin text-4xl text-blue-500"></i>
                 </div>
-                <span class="font-black uppercase tracking-widest text-sm">LinkedIn Profissional</span>
+                <span class="font-black uppercase tracking-widest text-sm">LinkedIn</span>
             </a>
-            <a href="https://wa.me/5588988824078" target="_blank" class="bg-indigo-600 p-10 rounded-3xl flex flex-col items-center gap-6 group shadow-2xl shadow-indigo-600/20 hover:bg-indigo-500 transition">
+            <a href="https://wa.me/5588988824078" target="_blank" class="bg-indigo-600 p-10 rounded-3xl flex flex-col items-center gap-6 group shadow-2xl hover:bg-indigo-500 transition">
                 <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center">
                     <i class="fa-brands fa-whatsapp text-4xl"></i>
                 </div>
-                <span class="font-black uppercase tracking-widest text-sm text-white">Chamar no WhatsApp</span>
+                <span class="font-black uppercase tracking-widest text-sm text-white">WhatsApp</span>
             </a>
         </div>
     </section>
@@ -153,10 +175,34 @@
 
     <script>
         const projectData = {
-            gestorflex: { title: "GestorFlex ERP", tag: "Enterprise Resource Planning", challenge: "Negócios locais com dificuldade em centralizar estoque, vendas e mesas em um único local.", solution: "Desenvolvi um sistema robusto com Java 21 e Spring Boot. Implementei PDV intuitivo e dashboards analíticos em React para facilitar a tomada de decisão.", stack: "Java 21, Spring Boot 3, React, MySQL, Docker." },
-            n8n: { title: "Atendente IA Clínica", tag: "AI Agent & Automation", challenge: "Clínicas perdendo pacientes devido à demora no atendimento inicial e triagem manual exaustiva.", solution: "Agente de IA que entende o contexto do paciente, faz a triagem médica inicial e agenda consultas via n8n e OpenAI em segundos.", stack: "n8n, OpenAI, WhatsApp Cloud API, Node.js." },
-            flushcar: { title: "Flush Car Manager", tag: "Estética Automotiva Premium", challenge: "Gestão complexa de fluxos de trabalho em centros de detalhamento automotivo e controle financeiro de peças.", solution: "Interface de alta performance feita em TypeScript com Supabase para persistência de dados em tempo real e checklists automatizados.", stack: "TypeScript, React, Supabase, Tailwind CSS." },
-            barber: { title: "BarberSaaS", tag: "SaaS & Agendamento", challenge: "Barbearias perdendo tempo com agendamentos manuais e conflitos de horários.", solution: "Plataforma desenvolvida 80% em JavaScript puro e Node.js. Utiliza Google OAuth2 para sincronização direta com o calendário do profissional.", stack: "JavaScript (80%), Node.js, Google API, MongoDB, OAuth2." }
+            gestorflex: { 
+                title: "GestorFlex & Cardápio", 
+                tag: "Ecossistema Comercial", 
+                challenge: "Necessidade de um fluxo unificado entre pedidos web (cliente) e painel administrativo (cozinha).", 
+                solution: "Desenvolvi sincronização em tempo real entre o pedido web e o painel administrativo com sistema de impressão térmica automática.", 
+                stack: "Java 17, Spring Boot, React, Tailwind, MySQL." 
+            },
+            n8n: { 
+                title: "Agente IA Clínica", 
+                tag: "IA & Automação", 
+                challenge: "Clínicas com alta taxa de abandono no WhatsApp por falta de triagem rápida.", 
+                solution: "Agente inteligente que entende sintomas, realiza triagem inicial e agenda horários sem intervenção humana.", 
+                stack: "n8n Workflow, OpenAI GPT-4, Node.js." 
+            },
+            flushcar: { 
+                title: "Flush Car Manager", 
+                tag: "Performance Automotiva", 
+                challenge: "Dificuldade em precificar serviços complexos de estética para diferentes tamanhos de veículos.", 
+                solution: "Módulo de precificação automatizada e dashboards de lucratividade por serviço/categoria de veículo.", 
+                stack: "TypeScript, React, Supabase." 
+            },
+            barber: { 
+                title: "BarberSaaS", 
+                tag: "SaaS Multi-tenant", 
+                challenge: "Gestão de múltiplas agendas com lógicas de bloqueio de horários personalizadas.", 
+                solution: "Plataforma em produção que automatiza agendas reais usando integração bidirecional com Google Calendar API.", 
+                stack: "JavaScript (80%), Node.js, MongoDB, Google API." 
+            }
         };
 
         function showDetails(id) {
@@ -166,12 +212,11 @@
                 <p class="text-indigo-400 text-xs font-black uppercase tracking-widest mb-10">${data.tag}</p>
                 <div class="space-y-8">
                     <div><h4 class="text-white font-black text-sm uppercase mb-3 tracking-widest">O Desafio</h4><p class="text-slate-400 leading-relaxed text-sm">${data.challenge}</p></div>
-                    <div><h4 class="text-white font-black text-sm uppercase mb-3 tracking-widest">A Solução</h4><p class="text-slate-400 leading-relaxed text-sm">${data.solution}</p></div>
-                    <div class="pt-6 border-t border-white/5"><p class="text-indigo-300 font-black text-xs uppercase tracking-widest">Stack Técnica: ${data.stack}</p></div>
+                    <div><h4 class="text-white font-black text-sm uppercase mb-3 tracking-widest">Destaque da Solução</h4><p class="text-slate-400 leading-relaxed text-sm">${data.solution}</p></div>
+                    <div class="pt-6 border-t border-white/5"><p class="text-indigo-300 font-black text-xs uppercase tracking-widest">Stack: ${data.stack}</p></div>
                 </div>`;
             document.getElementById('projectModal').style.display = 'flex';
         }
-
         function closeModal(e) { if(e.target.id === 'projectModal') document.getElementById('projectModal').style.display = 'none'; }
     </script>
 </body>
