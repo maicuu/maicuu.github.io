@@ -8,222 +8,269 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #050505; color: #e2e8f0; scroll-behavior: smooth; }
+
         .glass-card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); backdrop-filter: blur(12px); transition: 0.4s ease; }
         .glass-card:hover { border-color: rgba(99, 102, 241, 0.4); background: rgba(255, 255, 255, 0.04); transform: translateY(-5px); }
+
         .skill-box { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 20px; padding: 30px; transition: 0.3s; height: 100%; }
         .skill-box:hover { border-color: #6366f1; background: rgba(99, 102, 241, 0.05); }
+
         .skill-tag { background: rgba(99, 102, 241, 0.1); border: 1px solid rgba(99, 102, 241, 0.2); padding: 5px 12px; border-radius: 8px; font-size: 0.8rem; font-weight: 600; color: #a5b4fc; }
-        .project-img-big { width: 100%; height: 320px; object-fit: cover; border-radius: 15px; transition: 0.5s; cursor: pointer; border: 1px solid rgba(255,255,255,0.05); }
+
+        .project-img-big {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            border-radius: 15px;
+            transition: 0.5s;
+            cursor: pointer;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
         .modal-overlay { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.96); align-items: center; justify-content: center; padding: 20px; }
         .modal-content { background: #0f1115; border: 1px solid #1e293b; max-width: 650px; width: 100%; padding: 40px; border-radius: 28px; position: relative; }
+
         .tech-list li { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: #94a3b8; margin-bottom: 4px; }
         .tech-list li::before { content: "•"; color: #6366f1; font-weight: bold; }
+
         .award-badge { background: linear-gradient(90deg, #6366f1, #a855f7); color: white; padding: 4px 15px; border-radius: 50px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
+
+        @media (max-width: 768px) {
+            .glass-card { backdrop-filter: none; background: #0f1115; }
+        }
     </style>
 </head>
+
 <body class="antialiased overflow-x-hidden">
 
-    <div id="projectModal" class="modal-overlay" onclick="closeModal(event)">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <button onclick="document.getElementById('projectModal').style.display='none'" class="absolute top-8 right-8 text-slate-500 hover:text-white transition"><i class="fa-solid fa-xmark text-2xl"></i></button>
-            <div id="modalBody"></div>
-        </div>
+<!-- MODAL -->
+<div id="projectModal" class="modal-overlay" onclick="closeModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <button onclick="document.getElementById('projectModal').style.display='none'" class="absolute top-8 right-8 text-slate-500 hover:text-white transition">
+            <i class="fa-solid fa-xmark text-2xl"></i>
+        </button>
+        <div id="modalBody"></div>
+    </div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="fixed top-0 w-full z-50 bg-black/60 py-5 px-6 md:px-8 flex justify-between items-center backdrop-blur-xl border-b border-white/5">
+    <span class="text-2xl font-black tracking-tighter">MAICON<span class="text-indigo-500">.</span></span>
+
+    <div class="hidden md:flex gap-10 text-sm font-bold uppercase tracking-widest opacity-70">
+        <a href="#" class="hover:text-indigo-400 transition">Início</a>
+        <a href="#experiencia" class="hover:text-indigo-400 transition">Experiência</a>
+        <a href="#habilidades" class="hover:text-indigo-400 transition">Skills</a>
+        <a href="#projetos" class="hover:text-indigo-400 transition">Projetos</a>
+        <a href="#contato" class="hover:text-indigo-400 transition">Contato</a>
     </div>
 
-    <nav class="fixed top-0 w-full z-50 bg-black/60 py-5 px-8 flex justify-between items-center backdrop-blur-xl border-b border-white/5">
-        <span class="text-2xl font-black tracking-tighter">MAICON<span class="text-indigo-500">.</span></span>
-        <div class="hidden md:flex gap-10 text-sm font-bold uppercase tracking-widest opacity-70">
-            <a href="#" class="hover:text-indigo-400 transition">Início</a>
-            <a href="#experiencia" class="hover:text-indigo-400 transition">Experiência</a>
-            <a href="#habilidades" class="hover:text-indigo-400 transition">Skills</a>
-            <a href="#projetos" class="hover:text-indigo-400 transition">Projetos</a>
-            <a href="#contato" class="hover:text-indigo-400 transition">Contato</a>
-        </div>
-    </nav>
+    <button id="menuBtn" class="md:hidden text-2xl">
+        <i class="fa-solid fa-bars"></i>
+    </button>
+</nav>
 
-    <header class="min-h-screen flex flex-col justify-center items-center px-6 text-center pt-20">
-        <div class="flex gap-3 mb-6">
-            <span class="award-badge"><i class="fa-solid fa-trophy mr-2"></i> WorldSkills Competitor</span>
-            <span class="award-badge" style="background: linear-gradient(90deg, #10b981, #3b82f6);"><i class="fa-solid fa-microchip mr-2"></i> Fintech Expert</span>
-        </div>
-        <h1 class="text-5xl md:text-8xl font-black tracking-tighter mb-8 bg-clip-text text-transparent bg-gradient-to-b from-white to-slate-500 leading-none">Software Engineer</h1>
-        <p class="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed font-light mb-12 italic">
-            Especialista em <span class="text-white font-semibold">Arquitetura de Sistemas Integrados</span> e automações de missão crítica para o setor bancário.
-        </p>
-        <div class="flex flex-wrap justify-center gap-6">
-            <a href="#projetos" class="bg-indigo-600 text-white px-10 py-4 text-sm font-black uppercase tracking-widest rounded-xl hover:bg-indigo-500 transition shadow-lg shadow-indigo-500/20">Ver Portfolio</a>
-            <a href="https://wa.me/5588988824078" class="glass-card px-10 py-4 text-sm font-black uppercase tracking-widest rounded-xl hover:bg-white/10 transition">Disponível para Projetos</a>
-        </div>
-    </header>
+<!-- MOBILE MENU -->
+<div id="mobileMenu" class="hidden fixed top-0 left-0 w-full h-screen bg-black/95 flex flex-col items-center justify-center gap-10 text-2xl font-bold z-50">
+    <a href="#" onclick="toggleMenu()">Início</a>
+    <a href="#experiencia" onclick="toggleMenu()">Experiência</a>
+    <a href="#habilidades" onclick="toggleMenu()">Skills</a>
+    <a href="#projetos" onclick="toggleMenu()">Projetos</a>
+    <a href="#contato" onclick="toggleMenu()">Contato</a>
+</div>
 
-    <section id="experiencia" class="max-w-6xl mx-auto px-6 py-20 border-t border-white/5">
-        <h2 class="text-3xl font-black mb-16 text-center uppercase tracking-tighter italic">Experiência <span class="text-indigo-500">Corporativa</span></h2>
-        <div class="relative border-l border-indigo-500/30 ml-4 md:ml-0">
-            <div class="mb-12 ml-8 relative">
-                <div class="absolute -left-11 top-1 w-6 h-6 bg-indigo-600 rounded-full border-4 border-[#050505]"></div>
-                <div class="glass-card p-8 rounded-2xl">
-                    <div class="flex flex-wrap justify-between items-start mb-4">
-                        <div>
-                            <h3 class="text-xl font-bold text-white uppercase">Software Engineer | Automation Lead</h3>
-                            <p class="text-indigo-400 font-bold">Tech • Ago 2025 - Presente</p>
-                        </div>
-                        <span class="text-xs font-black bg-white/10 px-3 py-1 rounded-md uppercase tracking-widest">Fintech Focus</span>
-                    </div>
-                    <p class="text-slate-400 text-sm leading-relaxed mb-4 italic">
-                        Responsável pelo desenvolvimento de fluxos inteligentes de atendimento e negociação para **Caixa Econômica Federal** e **Bradesco**.
-                    </p>
-                    <ul class="tech-list grid md:grid-cols-2 gap-2">
-                        <li>Integração de APIs REST escaláveis</li>
-                        <li>Arquitetura de tomada de decisão (AGV)</li>
-                        <li>Manipulação de variáveis complexas e Logs</li>
-                        <li>Validação de dados em alta escala</li>
-                    </ul>
-                </div>
+<!-- HERO -->
+<header class="min-h-screen flex flex-col justify-center items-center px-4 sm:px-6 text-center pt-24">
+    <div class="flex gap-3 mb-6 flex-wrap justify-center">
+        <span class="award-badge">🏆 WorldSkills Competitor</span>
+        <span class="award-badge" style="background: linear-gradient(90deg, #10b981, #3b82f6);">💳 Fintech Expert</span>
+    </div>
+
+    <h1 class="text-4xl sm:text-5xl md:text-7xl xl:text-8xl font-black tracking-tighter mb-8 bg-clip-text text-transparent bg-gradient-to-b from-white to-slate-500 leading-none">
+        Software Engineer
+    </h1>
+
+    <p class="text-base sm:text-lg md:text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed font-light mb-12 italic">
+        Especialista em <span class="text-white font-semibold">Arquitetura de Sistemas Integrados</span> e automações bancárias.
+    </p>
+
+    <div class="flex flex-wrap justify-center gap-4 sm:gap-6">
+        <a href="#projetos" class="bg-indigo-600 text-white px-8 sm:px-10 py-4 text-sm font-black uppercase tracking-widest rounded-xl hover:bg-indigo-500 transition shadow-lg shadow-indigo-500/20">Ver Portfolio</a>
+        <a href="https://wa.me/5588988824078" class="glass-card px-8 sm:px-10 py-4 text-sm font-black uppercase tracking-widest rounded-xl hover:bg-white/10 transition">Disponível para Projetos</a>
+    </div>
+</header>
+
+<!-- EXPERIENCIA -->
+<section id="experiencia" class="max-w-6xl mx-auto px-4 sm:px-6 py-16 md:py-20 border-t border-white/5">
+    <h2 class="text-3xl font-black mb-16 text-center uppercase tracking-tighter italic">Experiência <span class="text-indigo-500">Corporativa</span></h2>
+    <div class="relative border-l border-indigo-500/30 ml-4 md:ml-0">
+        <div class="mb-12 ml-8 relative">
+            <div class="absolute -left-11 top-1 w-6 h-6 bg-indigo-600 rounded-full border-4 border-[#050505]"></div>
+            <div class="glass-card p-8 rounded-2xl">
+                <h3 class="text-xl font-bold uppercase">Software Engineer | Automation Lead</h3>
+                <p class="text-indigo-400 font-bold">Tech • Ago 2025 - Presente</p>
+                <p class="text-slate-400 text-sm leading-relaxed mb-4 italic">
+                    Responsável pelo desenvolvimento de AGVs negociadores para Caixa e Bradesco.
+                </p>
+                <ul class="tech-list grid sm:grid-cols-2 gap-2">
+                    <li>Integração de APIs REST</li>
+                    <li>Arquitetura de decisão AGV</li>
+                    <li>Manipulação de variáveis e logs</li>
+                    <li>Validação de dados sensíveis</li>
+                </ul>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section id="habilidades" class="max-w-6xl mx-auto px-6 py-20 border-t border-white/5">
-        <h2 class="text-3xl font-black mb-16 text-center uppercase tracking-tighter italic">Tecnologias <span class="text-indigo-500">Core</span></h2>
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div class="skill-box">
-                <i class="fa-solid fa-layer-group text-indigo-500 mb-6 text-3xl"></i>
-                <h3 class="font-black text-white text-lg mb-4 uppercase tracking-tight">Backend</h3>
-                <div class="flex flex-wrap gap-2">
-                    <span class="skill-tag">Java 21</span><span class="skill-tag">Spring Boot</span><span class="skill-tag">Node.js</span><span class="skill-tag">Python</span>
-                </div>
-            </div>
-            <div class="skill-box">
-                <i class="fa-solid fa-code text-indigo-500 mb-6 text-3xl"></i>
-                <h3 class="font-black text-white text-lg mb-4 uppercase tracking-tight">Frontend</h3>
-                <div class="flex flex-wrap gap-2">
-                    <span class="skill-tag">React 18</span><span class="skill-tag">TypeScript</span><span class="skill-tag">Next.js</span><span class="skill-tag">Tailwind</span>
-                </div>
-            </div>
-            <div class="skill-box">
-                <i class="fa-solid fa-database text-indigo-500 mb-6 text-3xl"></i>
-                <h3 class="font-black text-white text-lg mb-4 uppercase tracking-tight">Infrastructure</h3>
-                <div class="flex flex-wrap gap-2">
-                    <span class="skill-tag">PostgreSQL</span><span class="skill-tag">Docker</span><span class="skill-tag">Git</span><span class="skill-tag">Supabase</span>
-                </div>
-            </div>
-            <div class="skill-box">
-                <i class="fa-solid fa-robot text-indigo-500 mb-6 text-3xl"></i>
-                <h3 class="font-black text-white text-lg mb-4 uppercase tracking-tight">Automation</h3>
-                <div class="flex flex-wrap gap-2">
-                    <span class="skill-tag">n8n</span><span class="skill-tag">OpenAI</span><span class="skill-tag">REST APIs</span><span class="skill-tag">Webhooks</span>
-                </div>
+<!-- SKILLS -->
+<section id="habilidades" class="max-w-6xl mx-auto px-4 sm:px-6 py-16 md:py-20 border-t border-white/5">
+    <h2 class="text-3xl font-black mb-16 text-center uppercase tracking-tighter italic">Tecnologias <span class="text-indigo-500">Core</span></h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <div class="skill-box">
+            <i class="fa-solid fa-layer-group text-indigo-500 mb-6 text-3xl"></i>
+            <h3 class="font-black text-white text-lg mb-4 uppercase tracking-tight">Backend</h3>
+            <div class="flex flex-wrap gap-2">
+                <span class="skill-tag">Java 21</span>
+                <span class="skill-tag">Spring Boot</span>
+                <span class="skill-tag">Node.js</span>
+                <span class="skill-tag">Python</span>
             </div>
         </div>
-    </section>
 
-    <section id="projetos" class="max-w-7xl mx-auto px-6 py-20 border-t border-white/5">
-        <h2 class="text-3xl font-black mb-20 text-center uppercase tracking-tighter italic">Sistemas & <span class="text-indigo-500">Produtos</span></h2>
-        <div class="grid md:grid-cols-2 gap-12">
-            
-            <div class="glass-card p-10 rounded-[32px] flex flex-col">
-                <img src="img/gestorflex.png" class="project-img-big mb-10" onclick="showDetails('gestorflex')">
-                <h3 class="text-2xl font-black mb-3 italic">GestorFlex: ERP & Digital POS</h3>
-                <p class="text-slate-400 mb-6 text-sm">SaaS completo com controle de estoque, gestão de mesas e módulo delivery integrado.</p>
-                <div class="mt-auto flex gap-4">
-                    <button onclick="showDetails('gestorflex')" class="flex-1 bg-white/5 py-4 rounded-xl font-bold hover:bg-white/10 transition">Arquitetura</button>
-                    <a href="https://github.com/maicuu/gestorfleex" target="_blank" class="px-6 bg-white/5 py-4 rounded-xl hover:bg-white/10 transition flex items-center"><i class="fa-brands fa-github"></i></a>
-                </div>
+        <div class="skill-box">
+            <i class="fa-solid fa-code text-indigo-500 mb-6 text-3xl"></i>
+            <h3 class="font-black text-white text-lg mb-4 uppercase tracking-tight">Frontend</h3>
+            <div class="flex flex-wrap gap-2">
+                <span class="skill-tag">React</span>
+                <span class="skill-tag">TypeScript</span>
+                <span class="skill-tag">Next.js</span>
+                <span class="skill-tag">Tailwind</span>
             </div>
-
-            <div class="glass-card p-10 rounded-[32px] flex flex-col border-indigo-500/20">
-                <img src="img/CRM.png" class="project-img-big mb-10" onclick="showDetails('n8n')">
-                <h3 class="text-2xl font-black mb-3 text-indigo-400 italic">Financial AI Orchestrator</h3>
-                <p class="text-slate-400 mb-6 text-sm">Automação de fluxos de negociação bancária e integração de agentes virtuais (Caixa/Bradesco).</p>
-                <button onclick="showDetails('n8n')" class="w-full bg-indigo-600/10 text-indigo-400 py-4 rounded-xl font-bold hover:bg-indigo-600/20 transition">Ver Workflow</button>
-            </div>
-
-            <div class="glass-card p-10 rounded-[32px] flex flex-col">
-                <img src="img/flushcar.png" class="project-img-big mb-10" onclick="showDetails('flushcar')">
-                <h3 class="text-2xl font-black mb-3 italic">Flush Car: Retention CRM</h3>
-                <p class="text-slate-400 mb-6 text-sm">Sistema de gestão automotiva com algoritmo de fidelização e notificações automáticas via WhatsApp.</p>
-                <button onclick="showDetails('flushcar')" class="bg-white/5 py-4 rounded-xl font-bold hover:bg-white/10 transition">Detalhes Técnicos</button>
-            </div>
-
-            <div class="glass-card p-10 rounded-[32px] flex flex-col">
-                <img src="img/barber.png" class="project-img-big mb-10" onclick="showDetails('barber')">
-                <h3 class="text-2xl font-black mb-3 italic">BarberSaaS Multi-Tenant</h3>
-                <p class="text-slate-400 mb-6 text-sm">Plataforma de agendamento em tempo real integrada à Google Calendar API.</p>
-                <a href="https://agendafacilbarber.com/belezapura" target="_blank" class="bg-indigo-600 py-4 rounded-xl font-bold text-center hover:bg-indigo-500 transition">Acessar Live Demo</a>
-            </div>
-
         </div>
-    </section>
 
-    <section id="contato" class="max-w-5xl mx-auto px-6 py-40 text-center">
-        <h2 class="text-4xl font-black mb-16 italic uppercase tracking-tighter">Vamos construir o <span class="text-indigo-500">Próximo Nível?</span></h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <a href="https://github.com/maicuu" target="_blank" class="glass-card p-10 rounded-3xl flex flex-col items-center gap-6 group">
-                <i class="fa-brands fa-github text-4xl opacity-50 group-hover:opacity-100 transition"></i>
-                <span class="font-black uppercase tracking-widest text-xs">GitHub</span>
-            </a>
-            <a href="https://www.linkedin.com/in/maiconce/" target="_blank" class="glass-card p-10 rounded-3xl flex flex-col items-center gap-6 group border-blue-500/20">
-                <i class="fa-brands fa-linkedin text-4xl text-blue-500"></i>
-                <span class="font-black uppercase tracking-widest text-xs">LinkedIn</span>
-            </a>
-            <a href="https://wa.me/5588988824078" target="_blank" class="bg-indigo-600 p-10 rounded-3xl flex flex-col items-center gap-6 group hover:bg-indigo-500 transition">
-                <i class="fa-brands fa-whatsapp text-4xl text-white"></i>
-                <span class="font-black uppercase tracking-widest text-xs text-white">WhatsApp</span>
-            </a>
+        <div class="skill-box">
+            <i class="fa-solid fa-database text-indigo-500 mb-6 text-3xl"></i>
+            <h3 class="font-black text-white text-lg mb-4 uppercase tracking-tight">Infrastructure</h3>
+            <div class="flex flex-wrap gap-2">
+                <span class="skill-tag">PostgreSQL</span>
+                <span class="skill-tag">Docker</span>
+                <span class="skill-tag">Supabase</span>
+                <span class="skill-tag">Git</span>
+            </div>
         </div>
-    </section>
 
-    <footer class="py-12 text-center text-slate-600 text-[10px] font-black uppercase tracking-[0.4em]">
-        © 2024-2025 Maicon Wendel • Full Stack Engineer • Representante WorldSkills
-    </footer>
+        <div class="skill-box">
+            <i class="fa-solid fa-robot text-indigo-500 mb-6 text-3xl"></i>
+            <h3 class="font-black text-white text-lg mb-4 uppercase tracking-tight">Automation</h3>
+            <div class="flex flex-wrap gap-2">
+                <span class="skill-tag">n8n</span>
+                <span class="skill-tag">OpenAI</span>
+                <span class="skill-tag">REST APIs</span>
+                <span class="skill-tag">Webhooks</span>
+            </div>
+        </div>
 
-    <script>
-        const projectData = {
-            gestorflex: { 
-                title: "GestorFlex ERP", 
-                tag: "High-Performance Management", 
-                challenge: "Necessidade de sincronizar pedidos em tempo real entre web delivery, balcão e cozinha com controle rígido de insumos.", 
-                solution: "Arquitetura Spring Boot com segurança JWT, integrando dashboard de lucro bruto/líquido e sistema de gestão de mesas dinâmico.", 
-                stack: "Java 21, Spring Boot, React, MySQL, JWT." 
-            },
-            n8n: { 
-                title: "Fintech IA Orchestrator", 
-                tag: "Critical Banking Automation", 
-                challenge: "Processar milhares de negociações de dívidas simultâneas integrando sistemas legados bancários via APIs.", 
-                solution: "Orquestração de agentes de IA para tomada de decisão em tempo real, validação de dados sensíveis e redução de falhas em fluxos bancários (Caixa/Bradesco).", 
-                stack: "n8n, Python, REST APIs, OpenAI GPT-4." 
-            },
-            flushcar: { 
-                title: "Flush Car CRM", 
-                tag: "Business Retention Tool", 
-                challenge: "Baixa taxa de retorno de clientes e dificuldade em monitorar a produtividade da equipe.", 
-                solution: "Algoritmo de retenção por placa: o sistema identifica inatividade e dispara cupons automáticos via WhatsApp API. Inclui precificação dinâmica por porte do veículo.", 
-                stack: "TypeScript, React, Supabase, WhatsApp Cloud API." 
-            },
-            barber: { 
-                title: "BarberSaaS", 
-                tag: "Scalable SaaS Architecture", 
-                challenge: "Gestão de múltiplas agendas e unidades garantindo zero conflito de horários.", 
-                solution: "Integração bidirecional com Google Calendar API e sistema de autenticação multi-tenant seguro.", 
-                stack: "Node.js, MongoDB, Google API, JWT." 
-            }
-        };
+    </div>
+</section>
 
-        function showDetails(id) {
-            const data = projectData[id];
-            document.getElementById('modalBody').innerHTML = `
-                <h2 class="text-3xl font-black mb-2 tracking-tighter italic text-white uppercase">${data.title}</h2>
-                <p class="text-indigo-400 text-[10px] font-black uppercase tracking-widest mb-10">${data.tag}</p>
-                <div class="space-y-8">
-                    <div><h4 class="text-white/50 font-black text-[10px] uppercase mb-3 tracking-widest">O Desafio de Negócio</h4><p class="text-slate-300 leading-relaxed text-sm">${data.challenge}</p></div>
-                    <div><h4 class="text-white/50 font-black text-[10px] uppercase mb-3 tracking-widest">A Solução Técnica</h4><p class="text-slate-300 leading-relaxed text-sm">${data.solution}</p></div>
-                    <div class="pt-6 border-t border-white/5"><p class="text-indigo-300 font-black text-xs uppercase tracking-widest">Tech Stack: ${data.stack}</p></div>
-                </div>`;
-            document.getElementById('projectModal').style.display = 'flex';
-        }
-        function closeModal(e) { if(e.target.id === 'projectModal') document.getElementById('projectModal').style.display = 'none'; }
-    </script>
+<!-- PROJETOS -->
+<section id="projetos" class="max-w-7xl mx-auto px-4 sm:px-6 py-16 md:py-20 border-t border-white/5">
+    <h2 class="text-3xl font-black mb-20 text-center uppercase tracking-tighter italic">Sistemas & <span class="text-indigo-500">Produtos</span></h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+        <!-- GESTORFLEX -->
+        <div class="glass-card p-10 rounded-[32px] flex flex-col">
+            <img src="img/gestorflex.png" class="project-img-big mb-10" onclick="showDetails('gestorflex')">
+            <h3 class="text-2xl font-black mb-3 italic">GestorFlex: ERP & POS</h3>
+            <p class="text-slate-400 mb-6 text-sm">SaaS completo com estoque, PDV e delivery.</p>
+            <div class="mt-auto flex gap-4">
+                <button onclick="showDetails('gestorflex')" class="flex-1 bg-white/5 py-4 rounded-xl font-bold hover:bg-white/10 transition">Arquitetura</button>
+                <a href="https://github.com/maicuu/gestorfleex" target="_blank" class="px-6 bg-white/5 py-4 rounded-xl hover:bg-white/10 transition flex items-center">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- FINTECH ORCHESTRATOR -->
+        <div class="glass-card p-10 rounded-[32px] flex flex-col border-indigo-500/20">
+            <img src="img/CRM.png" class="project-img-big mb-10" onclick="showDetails('n8n')">
+            <h3 class="text-2xl font-black mb-3 text-indigo-400 italic">Financial AI Orchestrator</h3>
+            <p class="text-slate-400 mb-6 text-sm">Automação bancária Caixa/Bradesco.</p>
+            <button onclick="showDetails('n8n')" class="w-full bg-indigo-600/10 text-indigo-400 py-4 rounded-xl font-bold hover:bg-indigo-600/20 transition">Ver Workflow</button>
+        </div>
+
+        <!-- FLUSH CAR -->
+        <div class="glass-card p-10 rounded-[32px] flex flex-col">
+            <img src="img/flushcar.png" class="project-img-big mb-10" onclick="showDetails('flushcar')">
+            <h3 class="text-2xl font-black mb-3 italic">Flush Car CRM</h3>
+            <p class="text-slate-400 mb-6 text-sm">Sistema automotivo com retenção inteligente.</p>
+            <button onclick="showDetails('flushcar')" class="bg-white/5 py-4 rounded-xl font-bold hover:bg-white/10 transition">Detalhes Técnicos</button>
+        </div>
+
+        <!-- BARBER -->
+        <div class="glass-card p-10 rounded-[32px] flex flex-col">
+            <img src="img/barber.png" class="project-img-big mb-10" onclick="showDetails('barber')">
+            <h3 class="text-2xl font-black mb-3 italic">BarberSaaS</h3>
+            <p class="text-slate-400 mb-6 text-sm">Agendamento multi-tenant em tempo real.</p>
+            <a href="https://agendafacilbarber.com/belezapura" target="_blank" class="bg-indigo-600 py-4 rounded-xl font-bold text-center hover:bg-indigo-500 transition">Live Demo</a>
+        </div>
+
+    </div>
+</section>
+
+<!-- CONTATO -->
+<section id="contato" class="max-w-5xl mx-auto px-4 sm:px-6 py-20 md:py-40 text-center">
+    <h2 class="text-4xl font-black mb-16 italic uppercase tracking-tighter">Vamos construir o <span class="text-indigo-500">Próximo Nível?</span></h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <a href="https://github.com/maicuu" target="_blank" class="glass-card p-10 rounded-3xl flex flex-col items-center gap-6">
+            <i class="fa-brands fa-github text-4xl"></i>
+            <span class="font-black uppercase tracking-widest text-xs">GitHub</span>
+        </a>
+
+        <a href="https://www.linkedin.com/in/maiconce/" target="_blank" class="glass-card p-10 rounded-3xl flex flex-col items-center gap-6 border-blue-500/20">
+            <i class="fa-brands fa-linkedin text-4xl text-blue-500"></i>
+            <span class="font-black uppercase tracking-widest text-xs">LinkedIn</span>
+        </a>
+
+        <a href="https://wa.me/5588988824078" target="_blank" class="bg-indigo-600 p-10 rounded-3xl flex flex-col items-center gap-6 hover:bg-indigo-500 transition">
+            <i class="fa-brands fa-whatsapp text-4xl text-white"></i>
+            <span class="font-black uppercase tracking-widest text-xs text-white">WhatsApp</span>
+        </a>
+    </div>
+</section>
+
+<footer class="py-12 text-center text-slate-600 text-[10px] font-black uppercase tracking-[0.4em]">
+    © 2024-2025 Maicon Wendel • Full Stack Engineer • WorldSkills
+</footer>
+
+<script>
+const menu = document.getElementById("mobileMenu");
+document.getElementById("menuBtn").onclick = () => menu.classList.toggle("hidden");
+
+const projectData = {
+    gestorflex:{title:"GestorFlex ERP",tag:"ERP",challenge:"Sincronizar PDV, delivery e estoque",solution:"Spring Boot + React com JWT",stack:"Java, React"},
+    n8n:{title:"Fintech Orchestrator",tag:"Banking AI",challenge:"Negociações bancárias massivas",solution:"Agentes IA + APIs bancárias",stack:"n8n, Python"},
+    flushcar:{title:"Flush Car CRM",tag:"Retention",challenge:"Baixa retenção",solution:"Automação WhatsApp",stack:"React, Supabase"},
+    barber:{title:"BarberSaaS",tag:"SaaS",challenge:"Agenda multi-unidade",solution:"Google Calendar API",stack:"Node.js"}
+};
+
+function showDetails(id){
+    const d=projectData[id];
+    document.getElementById("modalBody").innerHTML=`<h2 class="text-3xl font-black mb-2">${d.title}</h2><p class="text-indigo-400 text-xs mb-6">${d.tag}</p><p class="text-sm">${d.solution}</p>`;
+    document.getElementById("projectModal").style.display="flex";
+}
+function closeModal(e){
+    if(e.target.id==="projectModal") document.getElementById("projectModal").style.display="none";
+}
+</script>
+
 </body>
 </html>
