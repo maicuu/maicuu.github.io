@@ -1,4 +1,4 @@
-<!--<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
@@ -46,7 +46,6 @@
 
 <body class="antialiased overflow-x-hidden">
 
-<!-- MODAL -->
 <div id="projectModal" class="modal-overlay" onclick="closeModal(event)">
     <div class="modal-content" onclick="event.stopPropagation()">
         <button onclick="document.getElementById('projectModal').style.display='none'" class="absolute top-8 right-8 text-slate-500 hover:text-white transition">
@@ -56,7 +55,6 @@
     </div>
 </div>
 
-<!-- NAVBAR -->
 <nav class="fixed top-0 w-full z-50 bg-black/60 py-5 px-6 md:px-8 flex justify-between items-center backdrop-blur-xl border-b border-white/5">
     <span class="text-2xl font-black tracking-tighter">MAICON<span class="text-indigo-500">.</span></span>
 
@@ -73,7 +71,6 @@
     </button>
 </nav>
 
-<!-- MOBILE MENU -->
 <div id="mobileMenu" class="hidden fixed top-0 left-0 w-full h-screen bg-black/95 flex flex-col items-center justify-center gap-10 text-2xl font-bold z-50">
     <a href="#" onclick="toggleMenu()">Início</a>
     <a href="#experiencia" onclick="toggleMenu()">Experiência</a>
@@ -82,7 +79,6 @@
     <a href="#contato" onclick="toggleMenu()">Contato</a>
 </div>
 
-<!-- HERO -->
 <header class="min-h-screen flex flex-col justify-center items-center px-4 sm:px-6 text-center pt-24">
     <div class="flex gap-3 mb-6 flex-wrap justify-center">
         <span class="award-badge">🏆 WorldSkills Competitor</span>
@@ -103,7 +99,6 @@
     </div>
 </header>
 
-<!-- EXPERIENCIA -->
 <section id="experiencia" class="max-w-6xl mx-auto px-4 sm:px-6 py-16 md:py-20 border-t border-white/5">
     <h2 class="text-3xl font-black mb-16 text-center uppercase tracking-tighter italic">Experiência <span class="text-indigo-500">Corporativa</span></h2>
     <div class="relative border-l border-indigo-500/30 ml-4 md:ml-0">
@@ -126,7 +121,6 @@
     </div>
 </section>
 
-<!-- SKILLS -->
 <section id="habilidades" class="max-w-6xl mx-auto px-4 sm:px-6 py-16 md:py-20 border-t border-white/5">
     <h2 class="text-3xl font-black mb-16 text-center uppercase tracking-tighter italic">Tecnologias <span class="text-indigo-500">Core</span></h2>
 
@@ -136,10 +130,10 @@
             <i class="fa-solid fa-layer-group text-indigo-500 mb-6 text-3xl"></i>
             <h3 class="font-black text-white text-lg mb-4 uppercase tracking-tight">Backend</h3>
             <div class="flex flex-wrap gap-2">
-                <span class="skill-tag">Java 21</span>
+                <span class="skill-tag">Java 17/21</span>
                 <span class="skill-tag">Spring Boot</span>
+                <span class="skill-tag">Quarkus</span>
                 <span class="skill-tag">Node.js</span>
-                <span class="skill-tag">Python</span>
             </div>
         </div>
 
@@ -158,10 +152,10 @@
             <i class="fa-solid fa-database text-indigo-500 mb-6 text-3xl"></i>
             <h3 class="font-black text-white text-lg mb-4 uppercase tracking-tight">Infrastructure</h3>
             <div class="flex flex-wrap gap-2">
-                <span class="skill-tag">PostgreSQL</span>
+                <span class="skill-tag">MySQL</span>
                 <span class="skill-tag">Docker</span>
                 <span class="skill-tag">Supabase</span>
-                <span class="skill-tag">Git</span>
+                <span class="skill-tag">Git / CI-CD</span>
             </div>
         </div>
 
@@ -179,15 +173,13 @@
     </div>
 </section>
 
-<!-- PROJETOS -->
 <section id="projetos" class="max-w-7xl mx-auto px-4 sm:px-6 py-16 md:py-20 border-t border-white/5">
     <h2 class="text-3xl font-black mb-20 text-center uppercase tracking-tighter italic">Sistemas & <span class="text-indigo-500">Produtos</span></h2>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-        <!-- GESTORFLEX -->
         <div class="glass-card p-10 rounded-[32px] flex flex-col">
-            <img src="img/gestorflex.png" class="project-img-big mb-10" onclick="showDetails('gestorflex')">
+            <img src="img/gestorflex.png" class="project-img-big mb-10" onclick="showDetails('gestorflex')" alt="GestorFlex ERP">
             <h3 class="text-2xl font-black mb-3 italic">GestorFlex: ERP & POS</h3>
             <p class="text-slate-400 mb-6 text-sm">SaaS completo com estoque, PDV e delivery.</p>
             <div class="mt-auto flex gap-4">
@@ -198,25 +190,28 @@
             </div>
         </div>
 
-        <!-- FINTECH ORCHESTRATOR -->
-        <!--<div class="glass-card p-10 rounded-[32px] flex flex-col border-indigo-500/20">
-            <img src="img/CRM.png" class="project-img-big mb-10" onclick="showDetails('n8n')">
-            <h3 class="text-2xl font-black mb-3 text-indigo-400 italic">Financial AI Orchestrator</h3>
-            <p class="text-slate-400 mb-6 text-sm">Automação bancária Caixa/Bradesco.</p>
-            <button onclick="showDetails('n8n')" class="w-full bg-indigo-600/10 text-indigo-400 py-4 rounded-xl font-bold hover:bg-indigo-600/20 transition">Ver Workflow</button>
+        <div class="glass-card p-10 rounded-[32px] flex flex-col border-indigo-500/20 relative group">
+            <img src="img/factory-erp.png" class="project-img-big mb-10 group-hover:opacity-80 transition" onclick="showDetails('factoryerp')" alt="Factory ERP">
+            <h3 class="text-2xl font-black mb-3 text-indigo-400 italic">Factory ERP</h3>
+            <p class="text-slate-400 mb-6 text-sm">Sistema em nuvem para gestão de manufatura, receitas (BOM) e produção industrial.</p>
+            
+            <div class="mt-auto flex gap-4">
+                <button onclick="showDetails('factoryerp')" class="flex-1 bg-indigo-600/10 text-indigo-400 py-4 rounded-xl font-bold hover:bg-indigo-600/20 transition">Stack & Arquitetura</button>
+                <a href="https://app.lmtools.com.br" target="_blank" class="px-6 bg-indigo-600 py-4 rounded-xl text-white hover:bg-indigo-500 transition flex items-center" title="Ver Sistema no Ar">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+            </div>
         </div>
 
-        <!-- FLUSH CAR -->
         <div class="glass-card p-10 rounded-[32px] flex flex-col">
-            <img src="img/flushcar.png" class="project-img-big mb-10" onclick="showDetails('flushcar')">
+            <img src="img/flushcar.png" class="project-img-big mb-10" onclick="showDetails('flushcar')" alt="Flush Car CRM">
             <h3 class="text-2xl font-black mb-3 italic">Flush Car CRM</h3>
             <p class="text-slate-400 mb-6 text-sm">Sistema automotivo com retenção inteligente.</p>
             <button onclick="showDetails('flushcar')" class="bg-white/5 py-4 rounded-xl font-bold hover:bg-white/10 transition">Detalhes Técnicos</button>
         </div>
 
-        <!-- BARBER -->
         <div class="glass-card p-10 rounded-[32px] flex flex-col">
-            <img src="img/barber.png" class="project-img-big mb-10" onclick="showDetails('barber')">
+            <img src="img/barber.png" class="project-img-big mb-10" onclick="showDetails('barber')" alt="BarberSaaS">
             <h3 class="text-2xl font-black mb-3 italic">BarberSaaS</h3>
             <p class="text-slate-400 mb-6 text-sm">Agendamento multi-tenant em tempo real.</p>
             <a href="https://agendafacilbarber.com/belezapura" target="_blank" class="bg-indigo-600 py-4 rounded-xl font-bold text-center hover:bg-indigo-500 transition">Live Demo</a>
@@ -225,7 +220,6 @@
     </div>
 </section>
 
-<!-- CONTATO -->
 <section id="contato" class="max-w-5xl mx-auto px-4 sm:px-6 py-20 md:py-40 text-center">
     <h2 class="text-4xl font-black mb-16 italic uppercase tracking-tighter">Vamos construir o <span class="text-indigo-500">Próximo Nível?</span></h2>
 
@@ -256,22 +250,59 @@ const menu = document.getElementById("mobileMenu");
 document.getElementById("menuBtn").onclick = () => menu.classList.toggle("hidden");
 
 const projectData = {
-    gestorflex:{title:"GestorFlex ERP",tag:"ERP",challenge:"Sincronizar PDV, delivery e estoque",solution:"Spring Boot + React com JWT",stack:"Java, React"},
-    n8n:{title:"Fintech Orchestrator",tag:"Banking AI",challenge:"Negociações bancárias massivas",solution:"Agentes IA + APIs bancárias",stack:"n8n, Python"},
-    flushcar:{title:"Flush Car CRM",tag:"Retention",challenge:"Baixa retenção",solution:"Automação WhatsApp",stack:"React, Supabase"},
-    barber:{title:"BarberSaaS",tag:"SaaS",challenge:"Agenda multi-unidade",solution:"Google Calendar API",stack:"Node.js"}
+    gestorflex: {
+        title: "GestorFlex ERP",
+        tag: "ERP",
+        challenge: "Sincronizar frente de caixa (PDV), delivery e controle de estoque de forma centralizada.",
+        solution: "Arquitetura com Spring Boot e React protegida por JWT.",
+        stack: "Java, Spring Boot, React"
+    },
+    factoryerp: {
+        title: "Factory ERP",
+        tag: "Indústria 4.0 / SaaS",
+        challenge: "Gerenciar com precisão o estoque de matérias-primas e o custo dinâmico de produção baseado em receitas (Bill of Materials).",
+        solution: "Backend ultra-rápido construído com Java e Quarkus para baixo consumo de memória, persistência com Hibernate ORM e banco MySQL em nuvem. Frontend em React e Tailwind consumindo API via Axios.",
+        stack: "Java 17, Quarkus, React, MySQL, Docker, Railway"
+    },
+    flushcar: {
+        title: "Flush Car CRM",
+        tag: "Retention CRM",
+        challenge: "Baixa taxa de retorno de clientes no setor automotivo.",
+        solution: "Sistema inteligente com automação via WhatsApp para reengajamento.",
+        stack: "React, Supabase"
+    },
+    barber: {
+        title: "BarberSaaS",
+        tag: "SaaS",
+        challenge: "Agendamento multi-unidade com concorrência de horários.",
+        solution: "Integração customizada com a Google Calendar API.",
+        stack: "Node.js, Express"
+    }
 };
 
 function showDetails(id){
-    const d=projectData[id];
-    document.getElementById("modalBody").innerHTML=`<h2 class="text-3xl font-black mb-2">${d.title}</h2><p class="text-indigo-400 text-xs mb-6">${d.tag}</p><p class="text-sm">${d.solution}</p>`;
-    document.getElementById("projectModal").style.display="flex";
+    const d = projectData[id];
+    document.getElementById("modalBody").innerHTML = `
+        <h2 class="text-3xl font-black mb-2">${d.title}</h2>
+        <p class="text-indigo-400 text-xs tracking-widest uppercase mb-6">${d.tag}</p>
+        
+        <div class="bg-white/5 p-4 rounded-xl mb-4 border border-white/10">
+            <p class="text-sm text-slate-300"><strong class="text-white block mb-1">O Desafio:</strong> ${d.challenge}</p>
+        </div>
+        
+        <div class="bg-indigo-500/10 p-4 rounded-xl mb-6 border border-indigo-500/20">
+            <p class="text-sm text-slate-300"><strong class="text-indigo-400 block mb-1">A Solução:</strong> ${d.solution}</p>
+        </div>
+        
+        <p class="text-xs text-slate-500 font-bold tracking-wide uppercase"><i class="fa-solid fa-code mr-2"></i> ${d.stack}</p>
+    `;
+    document.getElementById("projectModal").style.display = "flex";
 }
+
 function closeModal(e){
-    if(e.target.id==="projectModal") document.getElementById("projectModal").style.display="none";
+    if(e.target.id === "projectModal") document.getElementById("projectModal").style.display = "none";
 }
 </script>
 
 </body>
 </html>
---!>
