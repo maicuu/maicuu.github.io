@@ -178,48 +178,60 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-        <div class="glass-card p-10 rounded-[32px] flex flex-col">
-            <img src="img/gestorflex.png" class="project-img-big mb-10" onclick="showDetails('gestorflex')" alt="GestorFlex ERP">
+        <div class="glass-card p-8 sm:p-10 rounded-[32px] flex flex-col h-full border border-white/5 hover:border-indigo-500/30 transition-all duration-300">
+            <img src="img/gestorflex.png" class="project-img-big mb-8" onclick="showDetails('gestorflex')" alt="GestorFlex ERP">
             <h3 class="text-2xl font-black mb-3 italic">GestorFlex: ERP & POS</h3>
-            <p class="text-slate-400 mb-6 text-sm">SaaS completo com estoque, PDV e delivery.</p>
-            <div class="mt-auto flex gap-4">
-                <button onclick="showDetails('gestorflex')" class="flex-1 bg-white/5 py-4 rounded-xl font-bold hover:bg-white/10 transition">Arquitetura</button>
-                <a href="https://github.com/maicuu/gestorfleex" target="_blank" class="px-6 bg-white/5 py-4 rounded-xl hover:bg-white/10 transition flex items-center">
-                    <i class="fa-brands fa-github"></i>
+            <p class="text-slate-400 mb-6 text-sm flex-grow">SaaS completo com estoque, PDV e delivery.</p>
+            
+            <div class="mt-auto flex gap-3 w-full">
+                <button onclick="showDetails('gestorflex')" class="flex-1 bg-white/5 py-3.5 rounded-xl font-bold text-sm hover:bg-white/10 transition">Arquitetura</button>
+                <a href="https://github.com/maicuu/gestorfleex" target="_blank" class="px-5 bg-white/5 py-3.5 rounded-xl hover:bg-white/10 transition flex items-center justify-center" title="Ver Repositório">
+                    <i class="fa-brands fa-github text-lg"></i>
                 </a>
             </div>
         </div>
 
-        <div class="glass-card p-10 rounded-[32px] flex flex-col border-indigo-500/20 relative group">
-            <img src="img/factory-erp.png" class="project-img-big mb-10 group-hover:opacity-80 transition" onclick="showDetails('factoryerp')" alt="Factory ERP">
+        <div class="glass-card p-8 sm:p-10 rounded-[32px] flex flex-col h-full border border-indigo-500/20 relative group transition-all duration-300">
+            <img src="img/factory-erp.png" class="project-img-big mb-8 group-hover:opacity-80 transition" onclick="showDetails('factoryerp')" alt="Factory ERP">
             <h3 class="text-2xl font-black mb-3 text-indigo-400 italic">Factory ERP</h3>
-            <p class="text-slate-400 mb-6 text-sm">Sistema em nuvem para gestão de manufatura, receitas (BOM) e produção industrial.</p>
+            <p class="text-slate-400 mb-6 text-sm flex-grow">Sistema em nuvem para gestão de manufatura, receitas (BOM) e produção industrial.</p>
             
-            <div class="mt-auto flex gap-4">
-                <button onclick="showDetails('factoryerp')" class="flex-1 bg-indigo-600/10 text-indigo-400 py-4 rounded-xl font-bold hover:bg-indigo-600/20 transition">Stack & Arquitetura</button>
-                <a href="https://app.lmtools.com.br" target="_blank" class="px-6 bg-indigo-600 py-4 rounded-xl text-white hover:bg-indigo-500 transition flex items-center" title="Ver Sistema no Ar">
+            <div class="mt-auto flex gap-3 w-full">
+                <button onclick="showDetails('factoryerp')" class="flex-1 bg-indigo-600/10 text-indigo-400 py-3.5 rounded-xl font-bold text-sm hover:bg-indigo-600/20 transition">Stack & Arq</button>
+                <a href="https://app.lmtools.com.br" target="_blank" class="px-5 bg-indigo-600 py-3.5 rounded-xl text-white hover:bg-indigo-500 transition flex items-center justify-center" title="Ver Sistema no Ar">
                     <i class="fa-solid fa-arrow-up-right-from-square"></i>
                 </a>
             </div>
         </div>
 
-        <div class="glass-card p-10 rounded-[32px] flex flex-col">
-            <img src="img/flushcar.png" class="project-img-big mb-10" onclick="showDetails('flushcar')" alt="Flush Car CRM">
+        <div class="glass-card p-8 sm:p-10 rounded-[32px] flex flex-col h-full border border-white/5 hover:border-indigo-500/30 transition-all duration-300">
+            <img src="img/flushcar.png" class="project-img-big mb-8" onclick="showDetails('flushcar')" alt="Flush Car CRM">
             <h3 class="text-2xl font-black mb-3 italic">Flush Car CRM</h3>
-            <p class="text-slate-400 mb-6 text-sm">Sistema automotivo com retenção inteligente.</p>
-            <button onclick="showDetails('flushcar')" class="bg-white/5 py-4 rounded-xl font-bold hover:bg-white/10 transition">Detalhes Técnicos</button>
+            <p class="text-slate-400 mb-6 text-sm flex-grow">Sistema automotivo com retenção inteligente via WhatsApp.</p>
+            
+            <div class="mt-auto flex gap-3 w-full">
+                <button onclick="showDetails('flushcar')" class="flex-1 bg-white/5 py-3.5 rounded-xl font-bold text-sm hover:bg-white/10 transition">Detalhes Técnicos</button>
+                <button class="px-5 bg-white/5 py-3.5 rounded-xl text-slate-500 cursor-not-allowed flex items-center justify-center" title="Em breve">
+                    <i class="fa-solid fa-lock text-sm"></i>
+                </button>
+            </div>
         </div>
 
-        <div class="glass-card p-10 rounded-[32px] flex flex-col">
-            <img src="img/barber.png" class="project-img-big mb-10" onclick="showDetails('barber')" alt="BarberSaaS">
+        <div class="glass-card p-8 sm:p-10 rounded-[32px] flex flex-col h-full border border-white/5 hover:border-indigo-500/30 transition-all duration-300">
+            <img src="img/barber.png" class="project-img-big mb-8" onclick="showDetails('barber')" alt="BarberSaaS">
             <h3 class="text-2xl font-black mb-3 italic">BarberSaaS</h3>
-            <p class="text-slate-400 mb-6 text-sm">Agendamento multi-tenant em tempo real.</p>
-            <a href="https://agendafacilbarber.com/belezapura" target="_blank" class="bg-indigo-600 py-4 rounded-xl font-bold text-center hover:bg-indigo-500 transition">Live Demo</a>
+            <p class="text-slate-400 mb-6 text-sm flex-grow">Agendamento multi-tenant em tempo real. (Atualmente com 3 clientes).</p>
+            
+            <div class="mt-auto flex gap-3 w-full">
+                <button onclick="showDetails('barber')" class="flex-1 bg-white/5 py-3.5 rounded-xl font-bold text-sm hover:bg-white/10 transition">Detalhes</button>
+                <a href="https://agendafacilbarber.com/belezapura" target="_blank" class="flex-1 bg-indigo-600 py-3.5 rounded-xl font-bold text-sm text-center text-white hover:bg-indigo-500 transition">
+                    Live Demo
+                </a>
+            </div>
         </div>
 
     </div>
 </section>
-
 <section id="contato" class="max-w-5xl mx-auto px-4 sm:px-6 py-20 md:py-40 text-center">
     <h2 class="text-4xl font-black mb-16 italic uppercase tracking-tighter">Vamos construir o <span class="text-indigo-500">Próximo Nível?</span></h2>
 
