@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maicon Wendel | Software Engineer</title>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/606/606204.png" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-color: #fff1f2; --border-color: #4c0519; --primary: #e11d48; 
+            --primary-hover: #be123c; --card-bg: #ffffff; --accent-yellow: #fde047;
+        }
+
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg-color);
+            color: var(--border-color); scroll-behavior: smooth; 
+            background-image: radial-gradient(#fecaca 1.5px, transparent 1.5px);
+            background-size: 32px 32px; 
+        }
+
+        .card-neo {
+            background: var(--card-bg); border: 3px solid var(--border-color);
+            border-radius: 20px; box-shadow: 6px 6px 0px var(--border-color);
+            transition: all 0.2s ease; overflow: hidden;
+        }
+        .card-neo:hover { transform: translate(-4px, -4px); box-shadow: 10px 10px 0px var(--border-color); }
+
+        .tag-neo {
+            padding: 4px 14px; border-radius: 50px; font-size: 0.75rem; font-weight: 800;
+            text-transform: uppercase; letter-spacing: 0.5px; border: 2px solid var(--border-color);
+            box-shadow: 2px 2px 0px var(--border-color); background: #ffffff; color: var(--border-color);
+            display: inline-block;
+        }
+
+        .btn-poke {
+            background: var(--primary); color: white; border: 3px solid var(--border-color);
+            border-radius: 12px; padding: 12px 30px; font-weight: 900; text-transform: uppercase;
+            letter-spacing: 1px; box-shadow: 4px 4px 0px var(--border-color); transition: 0.2s;
+            cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
+        }
+        .btn-poke:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0px var(--border-color); background: var(--primary-hover); }
+
+        .modal-overlay { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background: rgba(76, 5, 25, 0.6); backdrop-filter: blur(4px); align-items: center; justify-content: center; padding: 20px; }
+        .modal-content { background: var(--bg-color); border: 4px solid var(--border-color); max-width: 650px; width: 100%; padding: 40px; border-radius: 24px; position: relative; box-shadow: 12px 12px 0px var(--border-color); max-height: 90vh; overflow-y: auto; }
+
+        .project-img-big { width: 100%; aspect-ratio: 16/9; object-fit: cover; border-bottom: 3px solid var(--border-color); }
+
+        .photo-icon { 
+            width: 280px; height: 280px; border-radius: 50%; border: 6px solid var(--border-color); 
+            box-shadow: 8px 8px 0px var(--border-color); object-fit: cover; transition: 0.3s ease-in-out; background-color: white;
+        }
+        .photo-icon:hover { transform: scale(1.05) rotate(3deg); box-shadow: 12px 12px 0px var(--primary); }
+
+        .badge-neo { background: #ffffff; border: 2px solid var(--border-color); box-shadow: 3px 3px 0px var(--border-color); padding: 6px 16px; border-radius: 50px; font-size: 0.8rem; font-weight: 800; }
+
+        .avatar-float { animation: float 6s ease-in-out infinite; filter: drop-shadow(0px 15px 10px rgba(76, 5, 25, 0.2)); }
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0px); } }
+
+        .navbar { background-color: var(--border-color); color: #fff1f2; }
+
+        .lang-toggle {
+            background: var(--accent-yellow); color: var(--border-color); border: 2px solid var(--border-color);
+            padding: 5px 12px; border-radius: 8px; font-weight: 900; font-size: 0.7rem;
+            box-shadow: 3px 3px 0px var(--border-color); transition: 0.2s; cursor: pointer;
+        }
+        .lang-toggle:active { transform: translate(2px, 2px); box-shadow: none; }
+    </style>
+</head>
+
+<body class="antialiased overflow-x-hidden">
+
+<div id="projectModal" class="modal-overlay" onclick="closeModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <button onclick="document.getElementById('projectModal').style.display='none'" class="absolute top-6 right-6 text-rose-950 hover:text-rose-600 transition text-2xl font-black">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div id="modalBody"></div>
+    </div>
+</div>
+
+<nav class="navbar fixed top-0 w-full z-50 py-4 px-6 md:px-8 flex justify-between items-center border-b-4 border-rose-600">
+    <span class="text-2xl font-black tracking-tighter text-white">MAICON<span class="text-rose-400">.</span></span>
+
+    <div class="flex items-center gap-6">
+        <div class="hidden md:flex gap-10 text-sm font-black uppercase tracking-widest text-rose-100">
+            <a href="#" data-i18n="nav_start">Start</a>
+            <a href="#sobre-mim" data-i18n="nav_about">About</a>
+            <a href="#habilidades" data-i18n="nav_skills">Skills</a>
+            <a href="#projetos" data-i18n="nav_projects">Projects</a>
+        </div>
+        <button onclick="toggleLanguage()" class="lang-toggle" id="langBtn">PT</button>
+    </div>
+</nav>
+
+<header class="min-h-screen flex items-center justify-center px-4 sm:px-6 pt-24 pb-12 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div class="order-2 md:order-1 text-center md:text-left z-10">
+            <div class="flex gap-4 mb-6 flex-wrap justify-center md:justify-start">
+                <span class="badge-neo"><i class="fa-solid fa-trophy text-yellow-500 mr-2"></i> WorldSkills</span>
+                <span class="badge-neo"><i class="fa-solid fa-robot text-blue-500 mr-2"></i> AI & Voice Agents</span>
+            </div>
+
+            <h2 class="text-2xl md:text-3xl font-bold mb-2" data-i18n="hero_hi">Hi, I'm</h2>
+            <h1 class="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tighter mb-6 leading-none" style="text-shadow: 3px 3px 0px rgba(225,29,72,0.2);">
+                Maicon Wendel
+            </h1>
+
+            <p class="text-lg md:text-xl font-semibold mb-8 max-w-lg mx-auto md:mx-0">
+                <span class="text-rose-600 font-black" data-i18n="hero_role">Full-Stack Software Engineer.</span> 
+                <span data-i18n="hero_desc">Specialist in Integrated Systems Architecture and negotiation bots (AGV) for large corporate players.</span>
+            </p>
+
+            <div class="flex flex-wrap justify-center md:justify-start gap-4">
+                <a href="#projetos" class="btn-poke" data-i18n="btn_portfolio">View Portfolio</a>
+                <a href="#sobre-mim" class="bg-white text-rose-950 border-3 px-8 py-3 rounded-xl font-black uppercase tracking-widest border-2 border-rose-950 shadow-[4px_4px_0px_#4c0519] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_#4c0519] transition-all" data-i18n="btn_start">Start Game</a>
+            </div>
+            
+            <div class="mt-8 flex gap-6 justify-center md:justify-start text-3xl">
+                <a href="https://github.com/maicuu" target="_blank" class="hover:text-rose-600 transition hover:-translate-y-1 inline-block"><i class="fa-brands fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/maiconce/" target="_blank" class="hover:text-rose-600 transition hover:-translate-y-1 inline-block"><i class="fa-brands fa-linkedin"></i></a>
+            </div>
+        </div>
+
+        <div class="order-1 md:order-2 flex justify-center relative z-10">
+            <div class="absolute w-[300px] h-[300px] md:w-[450px] md:h-[450px] bg-rose-200 rounded-full mix-blend-multiply filter blur-2xl opacity-60 animate-pulse"></div>
+            <img src="img/red_crop.gif" alt="Avatar Maicon" class="avatar-float relative z-20 w-[280px] md:w-[400px] object-contain">
+        </div>
+    </div>
+</header>
+
+<section id="sobre-mim" class="max-w-6xl mx-auto px-4 sm:px-6 py-20 border-t-4 border-rose-950 border-dashed">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div class="order-2 lg:order-1 flex justify-center relative group w-full max-w-md mx-auto lg:max-w-full">
+            <img src="img/eu.png" alt="Maicon Wendel" class="photo-icon">
+            <div class="absolute -bottom-5 -right-5 lg:-bottom-6 lg:-right-0 card-neo p-4 bg-rose-100 hidden sm:block z-10">
+                <p class="text-xs font-black uppercase tracking-widest mb-2 text-rose-950 border-b-2 border-rose-200 pb-1">Trainer Status</p>
+                <div class="flex items-center gap-2 text-rose-600 text-sm font-bold"><i class="fa-solid fa-heart"></i> HP: 100/100</div>
+                <div class="flex items-center gap-2 text-blue-600 text-sm font-bold mt-1"><i class="fa-solid fa-mug-hot"></i> PP: Max (Coffee)</div>
+            </div>
+        </div>
+        
+        <div class="order-1 lg:order-2">
+            <h2 class="text-4xl font-black mb-6 uppercase tracking-tighter" data-i18n="about_title">Player <span class="text-rose-600">Info</span></h2>
+            <div class="space-y-5 font-semibold text-base md:text-lg text-rose-950">
+                <div class="flex gap-4 items-start">
+                    <i class="fa-solid fa-terminal text-2xl text-rose-400 mt-1"></i>
+                    <p data-i18n="about_p1">Developer focused on robust systems architecture, databases, and corporate automations.</p>
+                </div>
+                <div class="flex gap-4 items-start">
+                    <i class="fa-solid fa-building-shield text-2xl text-rose-400 mt-1"></i>
+                    <p data-i18n="about_p2">Strong corporate experience building <span class="font-black text-rose-600">dialing bots (AGV) and Voice Agents</span> for major players like <strong>Caixa</strong> and <strong>Santander</strong>.</p>
+                </div>
+                <div class="flex gap-4 items-start">
+                    <i class="fa-solid fa-gamepad text-2xl text-rose-400 mt-1"></i>
+                    <p data-i18n="about_p3">In software engineering, there's no <em>Master Ball</em> to solve everything at once. I build my stack strategically for a <strong>"super effective"</strong> attack on problems.</p>
+                </div>
+                <div class="mt-8 p-5 bg-yellow-100 border-2 border-rose-950 rounded-xl shadow-[4px_4px_0px_#4c0519] transform hover:-translate-y-1 transition-transform">
+                    <div class="flex items-center gap-3 mb-2">
+                        <i class="fa-solid fa-map-location-dot text-2xl text-rose-600"></i>
+                        <h4 class="font-black text-rose-950 uppercase tracking-wider text-sm" data-i18n="quest_title">Current Quest</h4>
+                    </div>
+                    <p class="font-bold text-rose-900 text-sm md:text-base" data-i18n="quest_desc">Expand international journey and seek opportunities in Europe, with a focus on <span class="text-rose-600 font-black">Portugal</span>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="habilidades" class="max-w-6xl mx-auto px-4 sm:px-6 py-20 border-t-4 border-rose-950 border-dashed">
+    <h2 class="text-4xl font-black mb-16 text-center uppercase tracking-tighter" data-i18n="skills_title">Combat <span class="text-rose-600">Skills</span></h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <div class="card-neo bg-rose-50 p-6 flex flex-col items-center text-center h-full">
+            <div class="w-16 h-16 bg-white rounded-full border-2 border-rose-950 flex items-center justify-center mb-4 shadow-[3px_3px_0px_#4c0519] shrink-0"><i class="fa-solid fa-server text-rose-600 text-2xl"></i></div>
+            <h3 class="font-black text-xl mb-4 uppercase">Backend</h3>
+            <div class="flex flex-wrap gap-2 justify-center mb-6"><span class="tag-neo">Java 17</span><span class="tag-neo">Spring Boot</span><span class="tag-neo">Quarkus</span><span class="tag-neo">Node.js</span></div>
+            <p class="text-xs font-bold text-rose-800 border-t-2 border-rose-200 pt-3 w-full mt-auto" data-i18n="skills_back">REST APIs • Auth • Complex Logic</p>
+        </div>
+        <div class="card-neo bg-rose-50 p-6 flex flex-col items-center text-center h-full">
+            <div class="w-16 h-16 bg-white rounded-full border-2 border-rose-950 flex items-center justify-center mb-4 shadow-[3px_3px_0px_#4c0519] shrink-0"><i class="fa-brands fa-react text-blue-500 text-2xl"></i></div>
+            <h3 class="font-black text-xl mb-4 uppercase">Frontend</h3>
+            <div class="flex flex-wrap gap-2 justify-center mb-6"><span class="tag-neo">React</span><span class="tag-neo">Vite</span><span class="tag-neo">TypeScript</span><span class="tag-neo">Tailwind</span></div>
+            <p class="text-xs font-bold text-rose-800 border-t-2 border-rose-200 pt-3 w-full mt-auto" data-i18n="skills_front">Dashboards • Complete Systems</p>
+        </div>
+        <div class="card-neo bg-rose-50 p-6 flex flex-col items-center text-center h-full">
+            <div class="w-16 h-16 bg-white rounded-full border-2 border-rose-950 flex items-center justify-center mb-4 shadow-[3px_3px_0px_#4c0519] shrink-0"><i class="fa-solid fa-database text-slate-500 text-2xl"></i></div>
+            <h3 class="font-black text-xl mb-4 uppercase">Data</h3>
+            <div class="flex flex-wrap gap-2 justify-center mb-6"><span class="tag-neo">MySQL</span><span class="tag-neo">PostgreSQL</span><span class="tag-neo">Supabase</span><span class="tag-neo">MongoDB</span></div>
+            <p class="text-xs font-bold text-rose-800 border-t-2 border-rose-200 pt-3 w-full mt-auto" data-i18n="skills_data">Advanced SQL • Procedures • JSON</p>
+        </div>
+        <div class="card-neo bg-rose-50 p-6 flex flex-col items-center text-center h-full">
+            <div class="w-16 h-16 bg-white rounded-full border-2 border-rose-950 flex items-center justify-center mb-4 shadow-[3px_3px_0px_#4c0519] shrink-0"><i class="fa-solid fa-robot text-purple-600 text-2xl"></i></div>
+            <h3 class="font-black text-xl mb-4 uppercase">Bots & Auto</h3>
+            <div class="flex flex-wrap gap-2 justify-center mb-6"><span class="tag-neo">n8n / Make</span><span class="tag-neo">Voice Agents</span><span class="tag-neo">Webhooks</span></div>
+            <p class="text-xs font-bold text-rose-800 border-t-2 border-rose-200 pt-3 w-full mt-auto" data-i18n="skills_bots">Collection • Conversational Flows</p>
+        </div>
+    </div>
+    <div class="card-neo bg-white p-6 max-w-3xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex items-center gap-4"><i class="fa-solid fa-briefcase text-3xl text-yellow-500"></i><h3 class="font-black text-xl uppercase">Special Items</h3></div>
+        <div class="flex flex-wrap justify-center gap-3">
+            <span class="badge-neo border-dashed">Power BI</span><span class="badge-neo border-dashed">Kanban & OKR</span><span class="badge-neo border-dashed bg-yellow-100 text-yellow-900">Six Sigma Yellow Belt</span>
+        </div>
+    </div>
+</section>
+
+<section id="projetos" class="max-w-7xl mx-auto px-4 sm:px-6 py-20 border-t-4 border-rose-950 border-dashed">
+    <h2 class="text-4xl font-black mb-16 text-center uppercase tracking-tighter" data-i18n="projects_title">Projects & <span class="text-rose-600">Capturas</span></h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="projects-grid">
+        </div>
+</section>
+
+<footer class="py-12 text-center font-black uppercase tracking-[0.2em] border-t-4 border-rose-950 border-dashed mt-10 bg-rose-950 text-rose-200">
+    © 2026 Maicon Wendel • Full Stack Engineer
+</footer>
+
+<script>
+const translations = {
+    en: {
+        nav_start: "Start", nav_about: "About", nav_skills: "Skills", nav_projects: "Projects",
+        hero_hi: "Hi, I'm", hero_role: "Full-Stack Software Engineer.", hero_desc: "Specialist in Integrated Systems Architecture and negotiation bots (AGV) for large corporate players.",
+        btn_portfolio: "View Portfolio", btn_start: "Start Game",
+        about_title: "Player Info", about_p1: "Developer focused on robust systems architecture, databases, and corporate automations.",
+        about_p2: "Strong corporate experience building dialing bots (AGV) and Voice Agents for major players like Caixa and Santander.",
+        about_p3: "In software engineering, there's no Master Ball to solve everything at once. I build my stack strategically for a 'super effective' attack on problems.",
+        quest_title: "Current Quest", quest_desc: "Expand international journey and seek opportunities in Europe, with a focus on Portugal.",
+        skills_title: "Combat Skills", skills_back: "REST APIs • Auth • Complex Logic", skills_front: "Dashboards • Complete Systems", skills_data: "Advanced SQL • Procedures • JSON", skills_bots: "Collection • Conversational Flows",
+        projects_title: "Projects & Captures",
+        modal_challenge: "The Challenge", modal_solution: "The Solution", modal_features: "Key Features",
+        btn_inspect: "Inspect Project", btn_inspect_arch: "Inspect Architecture", btn_test: "Test Product", btn_source: "View Source",
+        status_closed: "Closed Source", status_prod: "In Production", status_in_dev: "In Development", label_commercial: "Commercial Product", label_interview: "Detailed architecture available in interview."
+    },
+    pt: {
+        nav_start: "Início", nav_about: "Sobre", nav_skills: "Skills", nav_projects: "Projetos",
+        hero_hi: "Olá, eu sou o", hero_role: "Software Engineer Full-Stack.", hero_desc: "Especialista em Arquitetura de Sistemas Integrados e robôs de negociação (AGV) para grandes players corporativos.",
+        btn_portfolio: "Ver Portfolio", btn_start: "Start Game",
+        about_title: "Player Info", about_p1: "Desenvolvedor focado em arquitetura de sistemas robustos, bancos de dados e automações corporativas.",
+        about_p2: "Tenho forte atuação corporativa construindo robôs de ligação (AGV) e Voice Agents para players gigantes como Caixa e Santander.",
+        about_p3: "Na engenharia de software não existe Master Ball pra resolver tudo de primeira. Por isso, monto minha stack estrategicamente para um ataque 'super efetivo'.",
+        quest_title: "Quest Atual", quest_desc: "Expandir jornada internacional e buscar oportunidades na Europa, com foco principal em Portugal.",
+        skills_title: "Minhas Stacks", skills_back: "APIs REST • Auth • Lógica Complexa", skills_front: "Dashboards • Sistemas Completos", skills_data: "SQL Avançado • Procedures • JSON", skills_bots: "Cobrança • Fluxos Conversacionais",
+        projects_title: "Projetos & Capturas",
+        modal_challenge: "O Desafio", modal_solution: "A Solução", modal_features: "Principais Features",
+        btn_inspect: "Inspecionar Projeto", btn_inspect_arch: "Inspecionar Arquitetura", btn_test: "Testar Produto", btn_source: "Ver Código Fonte",
+        status_closed: "Código Fechado", status_prod: "Em Produção", status_in_dev: "Em desenvolvimento", label_commercial: "Produto Comercial Fechado", label_interview: "Arquitetura detalhada disponível em entrevista."
+    }
+};
+
+let currentLang = 'en';
+
+const projectData = {
+    factoryerp: {
+        title: "Factory ERP", tag: {en: "Industry 4.0", pt: "Indústria 4.0"}, status: "open", repoUrl: "https://github.com/maicuu/factory-erp", img: "img/factory-erp.png",
+        challenge: {en: "Create a production suggestion algorithm based on BOM and manage raw materials.", pt: "Criar um algoritmo de sugestão de produção baseado em BOM e gerenciar matérias-primas."},
+        solution: {en: "Cloud-Native architecture using Java 17 with Quarkus. E2E coverage via Cypress.", pt: "Arquitetura Cloud-Native utilizando Java 17 com Quarkus. Cobertura E2E garantida por Cypress."},
+        stack: "Java 17, Quarkus, React + Vite, MySQL, Docker, Cypress",
+        features: {en: ["BOM Calculation Algorithm", "Industrial Production Optimization", "E2E & Unit Testing"], pt: ["Algoritmo de cálculo de BOM", "Otimização de Produção Industrial", "Testes E2E e Unitários"]}
+    },
+    pratto: {
+        title: "Pratto", tag: {en: "ERP & POS", pt: "ERP & PDV"}, status: "closed", img: "img/Pratto.png",
+        challenge: {en: "Synchronize POS, delivery and inventory in a centralized way handling transactions.", pt: "Sincronizar frente de caixa (PDV), delivery e estoque de forma centralizada."},
+        solution: {en: "Robust commercial system with Spring Boot and reactive frontend. Dashboard integration.", pt: "Sistema comercial robusto com Spring Boot e frontend reativo. Integração de Dashboards."},
+        stack: "Java 17, Spring Boot, React, Vite, Tailwind, MySQL",
+        features: {en: ["Fast Optimized POS", "Smart Inventory Control", "Analytical Dashboards"], pt: ["PDV Rápido e Otimizado", "Controle de Estoque Inteligente", "Dashboards Analíticos"]}
+    },
+    flushcar: {
+        title: "Flush Car", tag: {en: "Automotive SaaS", pt: "SaaS Automotivo"}, status: "open", repoUrl: "https://github.com/maicuu/flushcar", 
+        img: "in_development", // Alteração feita aqui
+        challenge: {en: "Unify complex vehicle pricing and manage CRM focused on retention.", pt: "Unificar precificação complexa por categoria de veículo e gerenciar CRM."},
+        solution: {en: "Supabase + PostgreSQL ecosystem for real-time DB and Auth. Fast SPA in TS.", pt: "Ecossistema Supabase + PostgreSQL para banco real-time. Interface SPA rápida em TS."},
+        stack: "React, TypeScript, Tailwind, Supabase, PostgreSQL",
+        features: {en: ["Real-time Dashboards", "Dynamic Category Pricing", "CRM (WhatsApp Integration)"], pt: ["Dashboards em Tempo Real", "Precificação Dinâmica", "Módulo CRM (Integração WhatsApp)"]}
+    },
+    barbersaas: {
+        title: "BarberSaaS v3", tag: {en: "Micro-SaaS", pt: "Micro-SaaS"}, status: "production", liveUrl: "https://agendafacilbarber.com/belezapura", img: "img/barber.png",
+        challenge: {en: "Eliminate scheduling gaps through a scalable White-Label platform.", pt: "Acabar com furos de horário através de uma plataforma White-Label escalável."},
+        solution: {en: "Node.js engine with Google Calendar API sync. Anti-Spam via Cloudflare Turnstile.", pt: "Motor em Node.js com sincronização Google Calendar. Proteção via Cloudflare Turnstile."},
+        stack: "Node.js, Express, MongoDB, Google OAuth2",
+        features: {en: ["Multi-Tenant by Slug", "Real-Time Sync", "Anti-Bot Security"], pt: ["Arquitetura Multi-Tenant", "Sincronismo Real-Time", "Segurança Anti-Bot"]}
+    }
+};
+
+function renderProjects() {
+    const grid = document.getElementById('projects-grid');
+    grid.innerHTML = '';
+    Object.keys(projectData).forEach(key => {
+        const p = projectData[key];
+
+        // Lógica de renderização condicional para a imagem/placeholder
+        let projectImageHtml = '';
+        if (p.img === 'in_development') {
+            projectImageHtml = `
+                <div class="project-img-big flex items-center justify-center bg-slate-100" style="border-bottom: 3px solid var(--border-color);">
+                    <span class="font-black text-rose-950 text-xl uppercase tracking-widest" data-i18n="status_in_dev">In Development</span>
+                </div>
+            `;
+        } else {
+            projectImageHtml = `<img src="${p.img}" class="project-img-big" onerror="this.src='https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800'">`;
+        }
+
+        const card = `
+            <div class="card-neo flex flex-col h-full bg-white pb-6 relative overflow-hidden">
+                ${p.status === 'closed' ? `<div class="absolute top-4 right-4 bg-rose-950 text-white text-[10px] font-black uppercase px-3 py-1 rounded-full z-10 shadow-[2px_2px_0px_#f43f5e]"><i class="fa-solid fa-lock"></i> ${translations[currentLang].status_closed}</div>` : ''}
+                ${p.status === 'production' ? `<div class="absolute top-4 right-4 bg-green-600 text-white text-[10px] font-black uppercase px-3 py-1 rounded-full z-10 flex items-center gap-2 shadow-[2px_2px_0px_#064e3b]"><i class="fa-solid fa-satellite-dish animate-pulse"></i> ${translations[currentLang].status_prod}</div>` : ''}
+                
+                ${projectImageHtml}
+
+                <div class="px-6 pt-6 flex-grow">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-2xl font-black">${p.title}</h3>
+                        <span class="bg-rose-100 text-rose-800 border-2 border-rose-800 font-bold text-xs px-2 py-1 rounded-md">${p.tag[currentLang]}</span>
+                    </div>
+                    <p class="font-semibold text-sm mb-6 text-slate-600">${p.challenge[currentLang]}</p>
+                </div>
+                <div class="px-6 flex gap-3 w-full">
+                    <button onclick="showDetails('${key}')" class="w-full bg-white border-2 border-rose-950 py-3 rounded-xl font-black text-sm hover:bg-rose-50 shadow-[3px_3px_0px_#4c0519] transition">
+                        ${key === 'pratto' || key === 'barbersaas' ? translations[currentLang].btn_inspect_arch : translations[currentLang].btn_inspect}
+                    </button>
+                </div>
+            </div>`;
+        grid.innerHTML += card;
+    });
+}
+
+function showDetails(id){
+    const d = projectData[id];
+    const t = translations[currentLang];
+    let featuresHtml = d.features[currentLang].map(f => `<li class="flex items-center gap-2 text-rose-950 font-bold text-sm mb-2"><i class="fa-solid fa-check text-rose-600"></i> ${f}</li>`).join('');
+
+    let actionAreaHtml = '';
+    if (d.status === 'production') {
+        actionAreaHtml = `<div class="mt-8 flex flex-col sm:flex-row gap-4 items-center justify-between border-t-2 border-rose-200 pt-6"><span class="text-xs font-black text-rose-700 bg-rose-100 px-3 py-2 rounded-lg border-2 border-rose-300"><i class="fa-solid fa-lock mr-1"></i> ${t.status_closed} (${t.status_prod})</span><a href="${d.liveUrl}" target="_blank" class="w-full sm:w-auto bg-green-600 text-white border-2 border-green-900 px-6 py-3 rounded-xl font-black uppercase hover:bg-green-700 shadow-[3px_3px_0px_#14532d] transition flex justify-center gap-2">${t.btn_test}</a></div>`;
+    } else if (d.status === 'closed') {
+        actionAreaHtml = `<div class="mt-8 flex flex-col sm:flex-row gap-4 items-center justify-between border-t-2 border-rose-200 pt-6"><span class="text-xs font-black text-rose-700 bg-rose-100 px-3 py-2 rounded-lg border-2 border-rose-300"><i class="fa-solid fa-lock mr-1"></i> ${t.label_commercial}</span><span class="text-xs font-bold text-slate-500 italic text-center">${t.label_interview}</span></div>`;
+    } else {
+        actionAreaHtml = `<div class="mt-8 flex flex-col sm:flex-row gap-4 items-center justify-between border-t-2 border-rose-200 pt-6"><span class="text-xs font-black text-slate-600 bg-slate-100 px-3 py-2 rounded-lg border-2 border-slate-300"><i class="fa-solid fa-code-branch mr-1"></i> Open Source</span><a href="${d.repoUrl}" target="_blank" class="w-full sm:w-auto bg-slate-800 text-white border-2 border-slate-950 px-6 py-3 rounded-xl font-black uppercase hover:bg-slate-700 shadow-[3px_3px_0px_#0f172a] transition flex justify-center gap-2">${t.btn_source}</a></div>`;
+    }
+
+    document.getElementById("modalBody").innerHTML = `
+        <h2 class="text-3xl font-black mb-2 text-rose-950">${d.title}</h2>
+        <p class="text-rose-600 text-sm tracking-widest uppercase mb-6 font-black">${d.tag[currentLang]}</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div class="bg-rose-50 p-5 rounded-xl border-2 border-rose-200 h-full flex flex-col"><strong class="text-rose-700 block mb-2 text-base"><i class="fa-solid fa-bullseye mr-2"></i> ${t.modal_challenge}</strong><p class="font-semibold text-rose-950 text-sm leading-relaxed">${d.challenge[currentLang]}</p></div>
+            <div class="bg-blue-50 p-5 rounded-xl border-2 border-blue-200 h-full flex flex-col"><strong class="text-blue-700 block mb-2 text-base"><i class="fa-solid fa-lightbulb mr-2"></i> ${t.modal_solution}</strong><p class="font-semibold text-blue-950 text-sm leading-relaxed">${d.solution[currentLang]}</p></div>
+        </div>
+        <div class="mb-6"><strong class="text-rose-950 block mb-3 uppercase tracking-wider text-sm"><i class="fa-solid fa-star text-yellow-500 mr-2"></i> ${t.modal_features}:</strong><ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-4">${featuresHtml}</ul></div>
+        <div class="bg-white border-2 border-slate-200 p-4 rounded-xl"><p class="text-sm font-black tracking-wide uppercase text-slate-800"><i class="fa-solid fa-microchip mr-2 text-rose-600"></i> Stack: <span class="font-bold text-slate-600 normal-case ml-2">${d.stack}</span></p></div>
+        ${actionAreaHtml}`;
+    document.getElementById("projectModal").style.display = "flex";
+}
+
+function toggleLanguage() {
+    currentLang = currentLang === 'en' ? 'pt' : 'en';
+    document.getElementById('langBtn').innerText = currentLang === 'en' ? 'PT' : 'EN';
+    
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[currentLang][key]) el.innerHTML = translations[currentLang][key];
+    });
+    
+    renderProjects();
+}
+
+function closeModal(e){ if(e.target.id === "projectModal") document.getElementById("projectModal").style.display = "none"; }
+
+window.onload = () => { renderProjects(); };
+</script>
+
+</body>
+</html>
